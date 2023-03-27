@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">PillTracker</string>
+    <string name="my_pills_nav_text">My Pills</string>
+    <string name="log_nav_text">Log</string>
+    <string name="pharmacy_nav_text">Pharmacy</string>
 </resources>
