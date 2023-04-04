@@ -8,7 +8,6 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.example.pilltracker.R
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import org.json.JSONObject
