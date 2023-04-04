@@ -12,6 +12,8 @@ import okhttp3.RequestBody.Companion.toRequestBody
 import org.json.JSONObject
 import java.io.IOException
 import kotlin.reflect.typeOf
+import org.json.JSONException
+
 
 
 class MainActivity : AppCompatActivity() {
@@ -22,7 +24,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val testTV = findViewById<TextView>(R.id.textViewResult)
+        val testResult = findViewById<TextView>(R.id.textViewResult)
+        var name:String
+        lateinit var price:String
+        lateinit var content:String
+        lateinit var companyName:String
+
+
+
 
         fun run() {
             val client = OkHttpClient()
@@ -46,10 +55,22 @@ class MainActivity : AppCompatActivity() {
                         if (!response.isSuccessful) throw IOException("Unexpected code $response")
 
 
-                        /*testTV.setText(response.body!!.string())*/
-                        println(response.body!!.string())
+                        var jsonString = response.body!!.string()
 
+                        val obj = JSONObject(jsonString)
+                        val data: JSONObject = obj.getJSONObject("data")
+                        name = data.getString("name")
+                        price = data.getString("price")
+                        content = data.getString("content")
+                        companyName = data.getString("companyName")
+                        println(data.toString())
+                        println("PillName: " + name)
+                        println("Price: " + price)
+                        println("Content: " + content)
+                        println("CompanyName: " + companyName)
 
+                        /*testTV.text = response.body!!.string()*/
+                        /*println(response.body!!.string())*/
 
 
                     }
