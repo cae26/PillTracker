@@ -62,8 +62,6 @@ class MainActivity : AppCompatActivity(), LoginFragment.LoginSuccessListener {
         bottomNavigationView.menu.findItem(R.id.nav_myPills).isEnabled = true
         bottomNavigationView.menu.findItem(R.id.nav_log).isEnabled = true
         bottomNavigationView.menu.findItem(R.id.nav_pharmacy).isEnabled = true
-
-
         bottomNavigationView.selectedItemId = R.id.nav_myPills
     }
 }
