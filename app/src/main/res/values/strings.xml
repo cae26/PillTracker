@@ -3,4 +3,5 @@
     <string name="my_pills_nav_text">My Pills</string>
     <string name="log_nav_text">Log</string>
     <string name="pharmacy_nav_text">Pharmacy</string>
+    <string name="title_activity_maps">MapsActivity</string>
 </resources>
