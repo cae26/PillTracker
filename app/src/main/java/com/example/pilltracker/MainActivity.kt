@@ -63,7 +63,7 @@ class MainActivity : AppCompatActivity(), LoginFragment.LoginSuccessListener {
         bottomNavigationView.menu.findItem(R.id.nav_log).isEnabled = true
         bottomNavigationView.menu.findItem(R.id.nav_pharmacy).isEnabled = true
 
-        // Set the selected item to the first page after a successful login
+
         bottomNavigationView.selectedItemId = R.id.nav_myPills
     }
 }
