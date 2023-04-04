@@ -1,3 +1,4 @@
+package com.example.pilltracker
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -14,12 +15,16 @@ import org.json.JSONObject
 import java.io.IOException
 
 class LoginFragment : Fragment() {
-    private lateinit var onLoginSuccessListener: () -> Unit
+    private lateinit var loginSuccessListener: LoginSuccessListener
+
+    interface LoginSuccessListener {
+        fun onLoginSuccess(username: String, password: String)
+    }
 
     companion object {
-        fun newInstance(onLoginSuccess: () -> Unit): LoginFragment {
+        fun newInstance(loginSuccessListener: LoginSuccessListener): LoginFragment {
             val fragment = LoginFragment()
-            fragment.onLoginSuccessListener = onLoginSuccess
+            fragment.loginSuccessListener = loginSuccessListener
             return fragment
         }
     }
@@ -49,7 +54,7 @@ class LoginFragment : Fragment() {
             } else {
                 loginUser(username, password) { jsonResponse ->
                     if (jsonResponse.getBoolean("status")) {
-                        onLoginSuccessListener()
+                        loginSuccessListener.onLoginSuccess(username, password)
                     } else {
                         Toast.makeText(requireContext(), "Login failed. Please check your credentials.", Toast.LENGTH_SHORT).show()
                     }

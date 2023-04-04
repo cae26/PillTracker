@@ -1,54 +1,46 @@
 package com.example.pilltracker
-
-import android.app.Activity
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import android.app.Dialog
-import android.content.ContentValues.TAG
-import android.content.Intent
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.android.volley.toolbox.JsonArrayRequest
-import com.android.volley.toolbox.Volley
-import okhttp3.*
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import org.json.JSONArray
-import org.json.JSONException
-import org.json.JSONObject
-import java.io.IOException
-import okhttp3.Request
 
 
-
-
-class MainActivity : AppCompatActivity() {
-    private lateinit var bottomNavigationView: BottomNavigationView
+class MainActivity : AppCompatActivity(), LoginFragment.LoginSuccessListener {
+    private var loggedInUsername: String? = null
+    private var loggedInPassword: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        bottomNavigationView = findViewById(R.id.bottom_navigation)
+        val logInPage = LoginFragment.newInstance(this)
+        replaceFragment(logInPage)
+
+        val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottom_navigation)
+
+        val myPillsPage: Fragment = MyPillsFragment()
+        val logPage: Fragment = LogFragment()
+        val pharmacyPage: Fragment = PharmacyFragment()
+
         bottomNavigationView.setOnItemSelectedListener { item ->
             lateinit var fragment: Fragment
-            when(item.itemId){
-                R.id.nav_myPills -> fragment = MyPillsFragment()
-                R.id.nav_log -> fragment = LogFragment()
-                R.id.nav_pharmacy -> fragment = PharmacyFragment()
+            when (item.itemId) {
+                R.id.nav_myPills -> fragment = myPillsPage
+                R.id.nav_log -> fragment = logPage
+                R.id.nav_pharmacy -> fragment = pharmacyPage
             }
             replaceFragment(fragment)
             true
         }
 
-        // Disable navigation buttons by default
-        setNavigationButtonsEnabled(false)
+        disableNavigationButtons()
+    }
 
-        // Show LoginFragment initially
-        replaceFragment(LoginFragment.newInstance(::onLoginSuccess))
+    override fun onLoginSuccess(username: String, password: String) {
+        loggedInUsername = username
+        loggedInPassword = password
+
+        enableNavigationButtons()
     }
 
     private fun replaceFragment(pillTrackerFragment: Fragment) {
@@ -58,14 +50,20 @@ class MainActivity : AppCompatActivity() {
         fragmentTransaction.commit()
     }
 
-    private fun setNavigationButtonsEnabled(isEnabled: Boolean) {
-        bottomNavigationView.menu.findItem(R.id.nav_myPills).isEnabled = isEnabled
-        bottomNavigationView.menu.findItem(R.id.nav_log).isEnabled = isEnabled
-        bottomNavigationView.menu.findItem(R.id.nav_pharmacy).isEnabled = isEnabled
+    private fun disableNavigationButtons() {
+        val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottom_navigation)
+        bottomNavigationView.menu.findItem(R.id.nav_myPills).isEnabled = false
+        bottomNavigationView.menu.findItem(R.id.nav_log).isEnabled = false
+        bottomNavigationView.menu.findItem(R.id.nav_pharmacy).isEnabled = false
     }
 
-    private fun onLoginSuccess() {
-        setNavigationButtonsEnabled(true)
+    private fun enableNavigationButtons() {
+        val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottom_navigation)
+        bottomNavigationView.menu.findItem(R.id.nav_myPills).isEnabled = true
+        bottomNavigationView.menu.findItem(R.id.nav_log).isEnabled = true
+        bottomNavigationView.menu.findItem(R.id.nav_pharmacy).isEnabled = true
+
+        // Set the selected item to the first page after a successful login
         bottomNavigationView.selectedItemId = R.id.nav_myPills
     }
 }
