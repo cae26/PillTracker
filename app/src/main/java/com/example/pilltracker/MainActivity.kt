@@ -2,9 +2,12 @@ package com.example.pilltracker
 import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.codepath.asynchttpclient.AsyncHttpClient
 import com.codepath.asynchttpclient.RequestParams
 import com.codepath.asynchttpclient.callback.TextHttpResponseHandler
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import okhttp3.*
 import okhttp3.RequestBody.Companion.toRequestBody
 import org.json.JSONObject
@@ -14,13 +17,13 @@ import org.json.JSONException
 
 
 
-class MainActivity : AppCompatActivity() {
-
-
-
-import androidx.fragment.app.Fragment
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import androidx.appcompat.app.AppCompatActivity
+//class MainActivity : AppCompatActivity() {
+//
+//
+//
+//import androidx.fragment.app.Fragment
+//import com.google.android.material.bottomnavigation.BottomNavigationView
+//import androidx.appcompat.app.AppCompatActivity
 
 
 class MainActivity : AppCompatActivity(), LoginFragment.LoginSuccessListener {
