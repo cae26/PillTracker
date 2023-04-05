@@ -13,8 +13,8 @@ class MainActivity : AppCompatActivity(), LoginFragment.LoginSuccessListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val logInPage = LoginFragment.newInstance(this)
-        replaceFragment(logInPage)
+//        val logInPage = LoginFragment.newInstance(this)
+//        replaceFragment(logInPage)
 
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottom_navigation)
 
@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity(), LoginFragment.LoginSuccessListener {
             true
         }
 
-        disableNavigationButtons()
+      //  disableNavigationButtons()
     }
 
     override fun onLoginSuccess(username: String, password: String) {
