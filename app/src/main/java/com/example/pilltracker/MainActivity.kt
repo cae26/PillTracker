@@ -17,13 +17,7 @@ import org.json.JSONException
 
 
 
-//class MainActivity : AppCompatActivity() {
-//
-//
-//
-//import androidx.fragment.app.Fragment
-//import com.google.android.material.bottomnavigation.BottomNavigationView
-//import androidx.appcompat.app.AppCompatActivity
+
 
 
 class MainActivity : AppCompatActivity(), LoginFragment.LoginSuccessListener {
@@ -64,6 +58,9 @@ class MainActivity : AppCompatActivity(), LoginFragment.LoginSuccessListener {
     override fun onLoginSuccess(username: String, password: String) {
         loggedInUsername = username
         loggedInPassword = password
+
+        val myPillsPage = MyPillsFragment.newInstance(loggedInUsername!!)
+        replaceFragment(myPillsPage)
 
         enableNavigationButtons()
     }

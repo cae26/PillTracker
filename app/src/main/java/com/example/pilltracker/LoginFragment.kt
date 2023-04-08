@@ -63,7 +63,7 @@ class LoginFragment : Fragment() {
     }
 
     private fun loginUser(username: String, password: String, callback: (JSONObject) -> Unit) {
-        val url = "https://afsaccess4.njit.edu/~sp2543/CS388AndroidBackend/login.php"
+        val url = "https://group8.dhruvaldhameliya.com/log_in.php"
 
         val client = OkHttpClient()
 
