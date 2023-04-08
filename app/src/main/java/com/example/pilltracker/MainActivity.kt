@@ -28,23 +28,27 @@ class MainActivity : AppCompatActivity(), LoginFragment.LoginSuccessListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
         PillTrackerAPI().run()
-
 
         val logInPage = LoginFragment.newInstance(this)
         replaceFragment(logInPage)
 
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottom_navigation)
 
-        val myPillsPage: Fragment = MyPillsFragment()
+        // Remove the initialization of myPillsPage from here
         val logPage: Fragment = LogFragment()
         val pharmacyPage: Fragment = PharmacyFragment()
 
         bottomNavigationView.setOnItemSelectedListener { item ->
             lateinit var fragment: Fragment
             when (item.itemId) {
-                R.id.nav_myPills -> fragment = myPillsPage
+                R.id.nav_myPills -> {
+                    if (loggedInUsername != null) {
+                        fragment = MyPillsFragment.newInstance(loggedInUsername!!)
+                    } else {
+                        return@setOnItemSelectedListener false
+                    }
+                }
                 R.id.nav_log -> fragment = logPage
                 R.id.nav_pharmacy -> fragment = pharmacyPage
             }
@@ -59,10 +63,9 @@ class MainActivity : AppCompatActivity(), LoginFragment.LoginSuccessListener {
         loggedInUsername = username
         loggedInPassword = password
 
+        enableNavigationButtons()
         val myPillsPage = MyPillsFragment.newInstance(loggedInUsername!!)
         replaceFragment(myPillsPage)
-
-        enableNavigationButtons()
     }
 
     private fun replaceFragment(pillTrackerFragment: Fragment) {
@@ -85,6 +88,5 @@ class MainActivity : AppCompatActivity(), LoginFragment.LoginSuccessListener {
         bottomNavigationView.menu.findItem(R.id.nav_log).isEnabled = true
         bottomNavigationView.menu.findItem(R.id.nav_pharmacy).isEnabled = true
         bottomNavigationView.selectedItemId = R.id.nav_myPills
-
     }
 }

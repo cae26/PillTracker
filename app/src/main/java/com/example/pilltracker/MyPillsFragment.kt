@@ -1,21 +1,20 @@
 package com.example.pilltracker
-import okhttp3.*
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import org.json.JSONArray
-import java.io.IOException
+
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import okhttp3.*
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import org.json.JSONArray
 import org.json.JSONObject
+import java.io.IOException
 
-class MyPillsFragment : Fragment() {
-
+class MyPillsFragment : Fragment(), MyPillsAdapter.OnItemClickListener {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var myPillsAdapter: MyPillsAdapter
@@ -31,6 +30,7 @@ class MyPillsFragment : Fragment() {
             return fragment
         }
     }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -42,13 +42,15 @@ class MyPillsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         recyclerView = view.findViewById(R.id.recyclerView)
-        myPillsAdapter = MyPillsAdapter(listOf()) // Initialize with an empty list
+        myPillsAdapter = MyPillsAdapter(listOf(), this)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.adapter = myPillsAdapter
+        val passedUsername = arguments?.getString(ARG_USERNAME)
+        println("Hello, World! $passedUsername")
 
-        // Call the fetchAndParseData() function to fetch and parse the data
-        fetchAndParseData("user1")
+        fetchAndParseData(passedUsername ?: "defaultUsername")
     }
+
     private fun fetchAndParseData(userName: String) {
         val url = "https://group8.dhruvaldhameliya.com/my_pills.php"
 
@@ -86,7 +88,7 @@ class MyPillsFragment : Fragment() {
                 }
 
                 activity?.runOnUiThread {
-                    recyclerView.adapter = MyPillsAdapter(medicines)
+                    myPillsAdapter.updateMyPills(medicines) // Update the existing adapter instead of creating a new one
                 }
             }
 
@@ -98,6 +100,11 @@ class MyPillsFragment : Fragment() {
         })
     }
 
-
-
+    override fun onItemClick(medicine: MyPills) {
+        val fragment = MyPillsDetailsFragment.newInstance(medicine)
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.pill_tracker_frame_layout, fragment)
+            .addToBackStack(null)
+            .commit()
+    }
 }
