@@ -1,6 +1,5 @@
 package com.example.pilltracker
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,7 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
-import android.widget.TextView
+import okhttp3.*
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import org.json.JSONObject
+import java.io.IOException
 
 class AddNotesFragment : Fragment() {
 
@@ -26,24 +28,60 @@ class AddNotesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // Submit button
-        val submitBtn = view.findViewById<Button>(R.id.submitBtn)
+        submitBtn = view.findViewById(R.id.submitBtn)
         // declarations for edit texts
         addNotes= view.findViewById(R.id.addNotes)
 
+        val log = arguments?.getParcelable<Logs>(ARG_LOG)
+        val logID = log?.id
+
         submitBtn.setOnClickListener {
-           //TODO chagee the data base
+            val note = addNotes.text.toString().trim()
 
-        }
+            if (note.isNotEmpty() && logID != null) {
+                // Update the notes field in the database using a JSON POST request
+                val url = "https://afsaccess4.njit.edu/~cae26/CS388/write_test.php"
 
+                val client = OkHttpClient()
 
-}
+                val requestBody = JSONObject().apply {
+                    put("logID", logID)
+                    put("notes", note)
+                }
 
-    companion object {
-        fun newInstance(log: Logs): Fragment {
-            val fragment = AddNotesFragment()
-            return fragment
+                val request = Request.Builder()
+                    .url(url)
+                    .post(RequestBody.create("application/json".toMediaTypeOrNull(), requestBody.toString()))
+                    .build()
+
+                client.newCall(request).enqueue(object : Callback {
+                    override fun onResponse(call: Call, response: Response) {
+                        val responseBody = response.body?.string()
+                        // Handle the response as needed
+                    }
+
+                    override fun onFailure(call: Call, e: IOException) {
+                        // Handle the failure as needed
+                    }
+                })
+
+                // Navigate back to the previous fragment
+                requireActivity().onBackPressed()
+            } else {
+                addNotes.error = "Notes field cannot be empty"
+            }
         }
     }
 
-
+    companion object {
+        private const val ARG_LOG = "log"
+        fun newInstance(log: Logs): AddNotesFragment {
+            val fragment = AddNotesFragment()
+            val args = Bundle().apply {
+                putParcelable(ARG_LOG, log)
+            }
+            fragment.arguments = args
+            return fragment
+        }
+    }
 }

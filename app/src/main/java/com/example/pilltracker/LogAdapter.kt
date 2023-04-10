@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 class LogAdapter(
     private var logs: List<Logs>,
-    private val listener: LogFragment
+    private val listener: OnItemClickListener
 ) : RecyclerView.Adapter<LogAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -35,7 +35,8 @@ class LogAdapter(
 
         holder.itemView.setOnClickListener {
             // Handle item click/tick event here
-            holder.checkBox.isChecked = !holder.checkBox.isChecked
+            //holder.checkBox.isChecked = !holder.checkBox.isChecked
+            listener.onItemClick(log)
         }
     }
 
