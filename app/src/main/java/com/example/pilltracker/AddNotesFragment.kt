@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.EditText
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import org.json.JSONArray
 import org.json.JSONObject
 import java.io.IOException
 
@@ -16,6 +17,7 @@ class AddNotesFragment : Fragment() {
 
     private lateinit var addNotes: EditText
     private lateinit var submitBtn: Button
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,8 +31,10 @@ class AddNotesFragment : Fragment() {
 
         // Submit button
         submitBtn = view.findViewById(R.id.submitBtn)
+
         // declarations for edit texts
         addNotes= view.findViewById(R.id.addNotes)
+
 
         val log = arguments?.getParcelable<Logs>(ARG_LOG)
         val logID = log?.id
@@ -40,7 +44,7 @@ class AddNotesFragment : Fragment() {
 
             if (note.isNotEmpty() && logID != null) {
                 // Update the notes field in the database using a JSON POST request
-                val url = "https://afsaccess4.njit.edu/~cae26/CS388/write_test.php"
+                val url = "https://group8.dhruvaldhameliya.com/add_notes.php"
 
                 val client = OkHttpClient()
 

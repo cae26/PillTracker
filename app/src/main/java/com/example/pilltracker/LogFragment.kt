@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.CheckBox
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -20,6 +21,10 @@ class LogFragment : Fragment(), LogAdapter.OnItemClickListener{
     private lateinit var recyclerView: RecyclerView
     private lateinit var logAdapter: LogAdapter
     private lateinit var selectAllCheckBox: CheckBox
+    private lateinit var inividualCheckBox: CheckBox
+    private lateinit var deleteBtn: Button
+    private lateinit var sendDoctor: Button
+
 
     companion object {
         private const val ARG_USERNAME = "username"

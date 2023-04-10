@@ -32,10 +32,9 @@ class LogAdapter(
         holder.dateTaken.text = log.dateTaken
         holder.additionalNotes.text = log.additionalNotes
 
-
         holder.itemView.setOnClickListener {
             // Handle item click/tick event here
-            //holder.checkBox.isChecked = !holder.checkBox.isChecked
+            holder.checkBox.isChecked = !holder.checkBox.isChecked
             listener.onItemClick(log)
         }
     }
