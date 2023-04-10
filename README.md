@@ -49,7 +49,7 @@ After finding an API to be used for getting medication details, implement the fo
      * User can search for pills
   
     
-  <img src='walkthrough_pillTracker_spring2.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+  <img src='walkthrough_pillTracker_sprint_2.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
  # License
 
     Copyright [2023] [Samikshya Poudel, Carlos Espana, Bret Seelall, Temitayo Ilori]
