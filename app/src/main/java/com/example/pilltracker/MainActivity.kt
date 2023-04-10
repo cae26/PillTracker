@@ -18,8 +18,6 @@ import org.json.JSONException
 
 
 
-
-
 class MainActivity : AppCompatActivity(), LoginFragment.LoginSuccessListener {
     private var loggedInUsername: String? = null
     private var loggedInPassword: String? = null
@@ -36,11 +34,11 @@ class MainActivity : AppCompatActivity(), LoginFragment.LoginSuccessListener {
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottom_navigation)
 
         // Remove the initialization of myPillsPage from here
-        val logPage: Fragment = LogFragment()
+       // val logPage: Fragment = LogFragment()
         val pharmacyPage: Fragment = PharmacyFragment()
 
         bottomNavigationView.setOnItemSelectedListener { item ->
-            lateinit var fragment: Fragment
+            val fragment: Fragment
             when (item.itemId) {
                 R.id.nav_myPills -> {
                     if (loggedInUsername != null) {
@@ -49,12 +47,24 @@ class MainActivity : AppCompatActivity(), LoginFragment.LoginSuccessListener {
                         return@setOnItemSelectedListener false
                     }
                 }
-                R.id.nav_log -> fragment = logPage
-                R.id.nav_pharmacy -> fragment = pharmacyPage
+                R.id.nav_log -> {
+                    if (loggedInUsername != null) {
+                        fragment = LogFragment.newInstance(loggedInUsername!!)
+                    } else {
+                        return@setOnItemSelectedListener false
+                    }
+                }
+                R.id.nav_pharmacy -> {
+                    fragment = PharmacyFragment()
+                }
+                else -> {
+                    return@setOnItemSelectedListener false
+                }
             }
             replaceFragment(fragment)
             true
         }
+
 
         disableNavigationButtons()
     }
@@ -64,6 +74,7 @@ class MainActivity : AppCompatActivity(), LoginFragment.LoginSuccessListener {
         loggedInPassword = password
 
         enableNavigationButtons()
+        val logPage= LogFragment.newInstance(loggedInUsername!!)
         val myPillsPage = MyPillsFragment.newInstance(loggedInUsername!!)
         replaceFragment(myPillsPage)
     }

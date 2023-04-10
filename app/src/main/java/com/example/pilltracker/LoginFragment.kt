@@ -8,6 +8,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.RecyclerView
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import org.json.JSONObject
@@ -15,6 +16,8 @@ import java.io.IOException
 
 class LoginFragment : Fragment() {
     private lateinit var loginSuccessListener: LoginSuccessListener
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var logsAdapter: LogAdapter
 
     interface LoginSuccessListener {
         fun onLoginSuccess(username: String, password: String)
