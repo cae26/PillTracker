@@ -27,9 +27,30 @@ After finding an API to be used for getting medication details, implement the fo
  # API parse output
  <img src='pill_tracker.png' title='API' width='' alt='API pic' />
  
+ # Sprint 2
+ 
+ - [x] Create backend php file for MyPills feature
+     * PhP file to retrive  the pill information
+- [x] Create backend php file for logs
+     * PhP file to insert notes and retrive  the log information
+ - [x] basic implemention of mypills page
+     * user can access pills details to the database
+     * user can see in the recycler view
+     
+ - [x] basic implementation of logs page
+     * user can go to `addnote page` information into database
+     * user can see logs info in the recycler view
+     
+ - [x] Display Nearby Pharmacies on map
+     * Get API to pull up nearby pharmacies and display on phone screen.
+     * Update map to show markers of nearby pharmacies to current location.
+     
+ - [x] Parse second endpoint for medicine api    
+     * User can search for pills
+ 
  # License
 
-    Copyright [2023] [Samikshya Poudel, Carlos Espana, Bret Seelall, Temitayo Llori]
+    Copyright [2023] [Samikshya Poudel, Carlos Espana, Bret Seelall, Temitayo Ilori]
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
