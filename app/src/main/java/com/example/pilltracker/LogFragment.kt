@@ -15,7 +15,7 @@ import org.json.JSONArray
 import org.json.JSONObject
 import java.io.IOException
 
-class LogFragment : Fragment() {
+class LogFragment : Fragment(), LogAdapter.OnItemClickListener{
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var logAdapter: LogAdapter
@@ -106,6 +106,14 @@ class LogFragment : Fragment() {
                 }
             }
         })
+    }
+
+    override fun onItemClick(log: Logs) {
+        val fragment = AddNotesFragment.newInstance(log)
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.pill_tracker_frame_layout, fragment)
+            .addToBackStack(null)
+            .commit()
     }
 
 }
