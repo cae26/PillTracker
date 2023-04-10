@@ -47,6 +47,8 @@ After finding an API to be used for getting medication details, implement the fo
      
  - [x] Parse second endpoint for medicine api    
      * User can search for pills
+  
+    
  
  # License
 
