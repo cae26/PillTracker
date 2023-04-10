@@ -6,14 +6,45 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/textViewResult"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
+
+    <Button
+        android:id="@+id/enter_button"
+        android:layout_width="124dp"
+        android:layout_height="49dp"
+        android:padding="10dp"
+        android:text="Enter"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textStyle="normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.898"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.027" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/emailsRv"
+        android:layout_width="413dp"
+        android:layout_height="655dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/search_medicine_text"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <EditText
+        android:id="@+id/search_medicine_text"
+        android:layout_width="211dp"
+        android:layout_height="52dp"
+        android:hint="@string/search_hint"
+        android:lines="1"
+        android:maxLines="1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/enter_button"
+        app:layout_constraintHorizontal_bias="0.657"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.023" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
