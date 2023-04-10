@@ -1,29 +1,8 @@
 package com.example.pilltracker
 import android.os.Bundle
-import android.util.Log
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.codepath.asynchttpclient.AsyncHttpClient
-import com.codepath.asynchttpclient.RequestParams
-import com.codepath.asynchttpclient.callback.TextHttpResponseHandler
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import okhttp3.*
-import okhttp3.RequestBody.Companion.toRequestBody
-import org.json.JSONObject
-import java.io.IOException
-import kotlin.reflect.typeOf
-import org.json.JSONException
-
-
-
-//class MainActivity : AppCompatActivity() {
-//
-//
-//
-//import androidx.fragment.app.Fragment
-//import com.google.android.material.bottomnavigation.BottomNavigationView
-//import androidx.appcompat.app.AppCompatActivity
 
 
 class MainActivity : AppCompatActivity(), LoginFragment.LoginSuccessListener {
@@ -34,29 +13,45 @@ class MainActivity : AppCompatActivity(), LoginFragment.LoginSuccessListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
         PillTrackerAPI().run()
-
 
         val logInPage = LoginFragment.newInstance(this)
         replaceFragment(logInPage)
 
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottom_navigation)
 
-        val myPillsPage: Fragment = MyPillsFragment()
-        val logPage: Fragment = LogFragment()
+        // Remove the initialization of myPillsPage from here
+       // val logPage: Fragment = LogFragment()
         val pharmacyPage: Fragment = PharmacyFragment()
 
         bottomNavigationView.setOnItemSelectedListener { item ->
-            lateinit var fragment: Fragment
+            val fragment: Fragment
             when (item.itemId) {
-                R.id.nav_myPills -> fragment = myPillsPage
-                R.id.nav_log -> fragment = logPage
-                R.id.nav_pharmacy -> fragment = pharmacyPage
+                R.id.nav_myPills -> {
+                    if (loggedInUsername != null) {
+                        fragment = MyPillsFragment.newInstance(loggedInUsername!!)
+                    } else {
+                        return@setOnItemSelectedListener false
+                    }
+                }
+                R.id.nav_log -> {
+                    if (loggedInUsername != null) {
+                        fragment = LogFragment.newInstance(loggedInUsername!!)
+                    } else {
+                        return@setOnItemSelectedListener false
+                    }
+                }
+                R.id.nav_pharmacy -> {
+                    fragment = PharmacyFragment()
+                }
+                else -> {
+                    return@setOnItemSelectedListener false
+                }
             }
             replaceFragment(fragment)
             true
         }
+
 
         disableNavigationButtons()
     }
@@ -66,6 +61,9 @@ class MainActivity : AppCompatActivity(), LoginFragment.LoginSuccessListener {
         loggedInPassword = password
 
         enableNavigationButtons()
+        val logPage= LogFragment.newInstance(loggedInUsername!!)
+        val myPillsPage = MyPillsFragment.newInstance(loggedInUsername!!)
+        replaceFragment(myPillsPage)
     }
 
     private fun replaceFragment(pillTrackerFragment: Fragment) {
@@ -88,6 +86,5 @@ class MainActivity : AppCompatActivity(), LoginFragment.LoginSuccessListener {
         bottomNavigationView.menu.findItem(R.id.nav_log).isEnabled = true
         bottomNavigationView.menu.findItem(R.id.nav_pharmacy).isEnabled = true
         bottomNavigationView.selectedItemId = R.id.nav_myPills
-
     }
 }
