@@ -55,12 +55,15 @@ class LogFragment : Fragment(), LogAdapter.OnItemClickListener{
             override fun changeSelectCheck(int: Int) {
                 idList.add(int)
                 Log.e("CUSTOM---->",idList.toString())
+                println(int.toString())
             }
 
             override fun changeSelectUncheck(int: Int) {
                 idList.remove(int)
                 Log.e("CUSTOM---->",idList.toString())
+                println(int.toString())
             }
+
 
         })
         recyclerView.layoutManager = LinearLayoutManager(requireContext())

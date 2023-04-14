@@ -1,9 +1,11 @@
 package com.example.pilltracker
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -40,7 +42,32 @@ class MyPillsFragment : Fragment(), MyPillsAdapter.OnItemClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val button = view.findViewById<Button>(R.id.buttonDelete)
 
+        val button2 = view.findViewById<Button>(R.id.button)
+        button2.setOnClickListener {
+            val fragment = SearchMedicineFragment.newInstance()
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.pill_tracker_frame_layout, fragment)
+                .addToBackStack(null)
+                .commit()
+        }
+        button.setOnClickListener {
+            // Get the selected item IDs
+            val selectedIds = myPillsAdapter.getSelectedIds()
+
+            // Show a confirmation dialog
+            AlertDialog.Builder(requireContext())
+                .setTitle("Are you sure?")
+                .setMessage("Do you want to send the selected IDs?")
+                .setPositiveButton("Yes") { _, _ ->
+                    // Send the selected IDs
+                    sendSelectedIds(selectedIds)
+                    println(selectedIds.toString())
+                }
+                .setNegativeButton("No", null)
+                .show()
+        }
         recyclerView = view.findViewById(R.id.recyclerView)
         myPillsAdapter = MyPillsAdapter(listOf(), this)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
@@ -107,4 +134,32 @@ class MyPillsFragment : Fragment(), MyPillsAdapter.OnItemClickListener {
             .addToBackStack(null)
             .commit()
     }
+
+    private fun sendSelectedIds(selectedIds: List<Int>) {
+        val url = "https://group8.dhruvaldhameliya.com/delete_pills.php"
+        val client = OkHttpClient()
+
+        val jsonArray = JSONArray()
+        for (id in selectedIds) {
+            jsonArray.put(JSONObject().apply {
+                put("pillID", id)
+            })
+        }
+        println("f"+jsonArray.toString())
+        val request = Request.Builder()
+            .url(url)
+            .post(RequestBody.create("application/json".toMediaTypeOrNull(), jsonArray.toString()))
+            .build()
+
+        client.newCall(request).enqueue(object : Callback {
+            override fun onResponse(call: Call, response: Response) {
+                // Handle successful response
+            }
+
+            override fun onFailure(call: Call, e: IOException) {
+                // Handle error
+            }
+        })
+    }
+
 }

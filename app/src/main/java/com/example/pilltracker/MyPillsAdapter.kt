@@ -3,6 +3,7 @@ package com.example.pilltracker
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
@@ -11,11 +12,14 @@ class MyPillsAdapter(
     private val listener: OnItemClickListener
 ) : RecyclerView.Adapter<MyPillsAdapter.ViewHolder>() {
 
+    private val selectedIds = ArrayList<Int>()
+
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val nameOfMedicine: TextView = view.findViewById(R.id.tv_medicine_name)
         val dose: TextView = view.findViewById(R.id.tv_dose)
         val timeToTakeMed: TextView = view.findViewById(R.id.tv_time_to_take_med)
         val remainingMedicine: TextView = view.findViewById(R.id.tv_remaining_medicine)
+        val checkBox: CheckBox = view.findViewById(R.id.checkBoxMypills)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -34,6 +38,15 @@ class MyPillsAdapter(
         holder.itemView.setOnClickListener {
             listener.onItemClick(medicine)
         }
+
+        // Set up the check listener
+        holder.checkBox.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                selectedIds.add(medicine.id)
+            } else {
+                selectedIds.remove(medicine.id)
+            }
+        }
     }
 
     override fun getItemCount(): Int {
@@ -48,5 +61,10 @@ class MyPillsAdapter(
 
     interface OnItemClickListener {
         fun onItemClick(medicine: MyPills)
+    }
+
+    // Get the IDs of the selected items
+    fun getSelectedIds(): ArrayList<Int> {
+        return selectedIds
     }
 }

@@ -3,7 +3,7 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class MyPills(
+data class   MyPills(
     val id: Int,
     val userName: String,
     val nameOfMedicine: String,
