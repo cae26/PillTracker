@@ -1,12 +1,11 @@
 package com.example.pilltracker
 
+import android.app.AlertDialog
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.CheckBox
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,20 +16,15 @@ import org.json.JSONArray
 import org.json.JSONObject
 import java.io.IOException
 
-class LogFragment : Fragment(), LogAdapter.OnItemClickListener{
+class LogFragment() : Fragment(), LogAdapter.OnItemClickListener {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var logAdapter: LogAdapter
-    private lateinit var selectAllCheckBox: CheckBox
-    private lateinit var inividualCheckBox: CheckBox
-    private lateinit var deleteBtn: Button
-    private lateinit var sendDoctor: Button
-
 
     companion object {
         private const val ARG_USERNAME = "username"
 
-        fun newInstance(username: String): LogFragment{
+        fun newInstance(username: String): LogFragment {
             val fragment = LogFragment()
             val args = Bundle()
             args.putString(ARG_USERNAME, username)
@@ -48,35 +42,38 @@ class LogFragment : Fragment(), LogAdapter.OnItemClickListener{
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        val idList = ArrayList<Int>()
+        val deleteButton = view.findViewById<Button>(R.id.deleteBtn)
+        val sendDoctorButton = view.findViewById<Button>(R.id.sendDoctor)
+//        button2.setOnClickListener {
+//            val fragment = SearchMedicineFragment.newInstance()
+//            requireActivity().supportFragmentManager.beginTransaction()
+//                .replace(R.id.pill_tracker_frame_layout, fragment)
+//                .addToBackStack(null)
+//                .commit()
+//        }
+        deleteButton.setOnClickListener {
+            // Get the selected item IDs
+            val selectedIds = logAdapter.getSelectedLogIds()
+            // Show a confirmation dialog
+            AlertDialog.Builder(requireContext())
+                .setTitle("Are you sure?")
+                .setMessage("Do you want to delete the selected Logs?")
+                .setPositiveButton("Yes") { _, _ ->
+                    // Send the selected IDs
+                    deleteSelectedLogs(selectedIds)
+                    println(selectedIds.toString())
+                }
+                .setNegativeButton("No", null)
+                .show()
+        }
         recyclerView = view.findViewById(R.id.logs)
-        logAdapter = LogAdapter(listOf() , this, object:LogAdapter.channgeSelectListener{
-            override fun changeSelectCheck(int: Int) {
-                idList.add(int)
-                Log.e("CUSTOM---->",idList.toString())
-                println(int.toString())
-            }
-
-            override fun changeSelectUncheck(int: Int) {
-                idList.remove(int)
-                Log.e("CUSTOM---->",idList.toString())
-                println(int.toString())
-            }
-
-
-        })
+        logAdapter = LogAdapter(listOf(), this)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        selectAllCheckBox = view.findViewById(R.id.checkBox2)
         recyclerView.adapter = logAdapter
         val passedUsername = arguments?.getString(ARG_USERNAME)
         println("Hello, World! $passedUsername")
 
         fetchAndParseData(passedUsername ?: "defaultUsername")
-        selectAllCheckBox.setOnCheckedChangeListener { _, isChecked ->
-            logAdapter.selectAllItems(isChecked)
-        }
-
     }
 
     private fun fetchAndParseData(userName: String) {
@@ -87,7 +84,7 @@ class LogFragment : Fragment(), LogAdapter.OnItemClickListener{
         // Create the JSON request body
         val requestBody = JSONObject().apply {
             put("userName", userName)
-           // put("userName", )
+            // put("userName", )
         }
 
         val request = Request.Builder()
@@ -129,6 +126,33 @@ class LogFragment : Fragment(), LogAdapter.OnItemClickListener{
         })
     }
 
+    private fun deleteSelectedLogs(selectedIds: List<Int>) {
+        val url = "https://group8.dhruvaldhameliya.com/delete_logs.php"
+        val client = OkHttpClient()
+
+        val jsonArray = JSONArray()
+        for (id in selectedIds) {
+            jsonArray.put(JSONObject().apply {
+                put("logID", id)
+            })
+        }
+        println("f"+jsonArray.toString())
+        val request = Request.Builder()
+            .url(url)
+            .post(RequestBody.create("application/json".toMediaTypeOrNull(), jsonArray.toString()))
+            .build()
+
+        client.newCall(request).enqueue(object : Callback {
+            override fun onResponse(call: Call, response: Response) {
+                // Handle successful response
+            }
+
+            override fun onFailure(call: Call, e: IOException) {
+                // Handle error
+            }
+        })
+    }
+
     override fun onItemClick(log: Logs) {
         val fragment = AddNotesFragment.newInstance(log)
         requireActivity().supportFragmentManager.beginTransaction()
@@ -136,7 +160,5 @@ class LogFragment : Fragment(), LogAdapter.OnItemClickListener{
             .addToBackStack(null)
             .commit()
     }
-    
-
 
 }
