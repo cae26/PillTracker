@@ -1,6 +1,7 @@
 package com.example.pilltracker
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -48,8 +49,20 @@ class LogFragment : Fragment(), LogAdapter.OnItemClickListener{
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val idList = ArrayList<Int>()
         recyclerView = view.findViewById(R.id.logs)
-        logAdapter = LogAdapter(listOf() , this)
+        logAdapter = LogAdapter(listOf() , this, object:LogAdapter.channgeSelectListener{
+            override fun changeSelectCheck(int: Int) {
+                idList.add(int)
+                Log.e("CUSTOM---->",idList.toString())
+            }
+
+            override fun changeSelectUncheck(int: Int) {
+                idList.remove(int)
+                Log.e("CUSTOM---->",idList.toString())
+            }
+
+        })
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         selectAllCheckBox = view.findViewById(R.id.checkBox2)
         recyclerView.adapter = logAdapter
@@ -120,5 +133,7 @@ class LogFragment : Fragment(), LogAdapter.OnItemClickListener{
             .addToBackStack(null)
             .commit()
     }
+    
+
 
 }
