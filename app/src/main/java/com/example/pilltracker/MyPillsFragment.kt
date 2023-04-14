@@ -76,13 +76,15 @@ class MyPillsFragment : Fragment(), MyPillsAdapter.OnItemClickListener {
         myPillsAdapter = MyPillsAdapter(listOf(), this)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.adapter = myPillsAdapter
+
         val passedUsername = arguments?.getString(ARG_USERNAME)
+        fetchAndParseData(passedUsername ?: "defaultUsername")
         println("Hello, World! $passedUsername")
         swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout)
         swipeRefreshLayout.setOnRefreshListener {
             fetchAndParseData(passedUsername ?: "defaultUsername")
         }
-        fetchAndParseData("defaultUsername")
+
 
     }
 
