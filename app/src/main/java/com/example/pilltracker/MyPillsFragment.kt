@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import org.json.JSONArray
@@ -20,6 +21,7 @@ class MyPillsFragment : Fragment(), MyPillsAdapter.OnItemClickListener {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var myPillsAdapter: MyPillsAdapter
+    private lateinit var swipeRefreshLayout: SwipeRefreshLayout
 
     companion object {
         private const val ARG_USERNAME = "username"
@@ -54,7 +56,7 @@ class MyPillsFragment : Fragment(), MyPillsAdapter.OnItemClickListener {
         }
         button.setOnClickListener {
             // Get the selected item IDs
-            val selectedIds = myPillsAdapter.getSelectedIds()
+            var selectedIds = myPillsAdapter.getSelectedIds()
 
             // Show a confirmation dialog
             AlertDialog.Builder(requireContext())
@@ -64,9 +66,11 @@ class MyPillsFragment : Fragment(), MyPillsAdapter.OnItemClickListener {
                     // Send the selected IDs
                     sendSelectedIds(selectedIds)
                     println(selectedIds.toString())
+                    selectedIds.clear()
                 }
                 .setNegativeButton("No", null)
                 .show()
+
         }
         recyclerView = view.findViewById(R.id.recyclerView)
         myPillsAdapter = MyPillsAdapter(listOf(), this)
@@ -74,8 +78,12 @@ class MyPillsFragment : Fragment(), MyPillsAdapter.OnItemClickListener {
         recyclerView.adapter = myPillsAdapter
         val passedUsername = arguments?.getString(ARG_USERNAME)
         println("Hello, World! $passedUsername")
+        swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout)
+        swipeRefreshLayout.setOnRefreshListener {
+            fetchAndParseData(passedUsername ?: "defaultUsername")
+        }
+        fetchAndParseData("defaultUsername")
 
-        fetchAndParseData(passedUsername ?: "defaultUsername")
     }
 
     private fun fetchAndParseData(userName: String) {
@@ -115,13 +123,15 @@ class MyPillsFragment : Fragment(), MyPillsAdapter.OnItemClickListener {
                 }
 
                 activity?.runOnUiThread {
-                    myPillsAdapter.updateMyPills(medicines) // Update the existing adapter instead of creating a new one
+                    myPillsAdapter.updateMyPills(medicines)
+                    swipeRefreshLayout.isRefreshing = false // Stop the refresh animation
                 }
             }
 
             override fun onFailure(call: Call, e: IOException) {
                 activity?.runOnUiThread {
                     Toast.makeText(requireContext(), "Error: ${e.localizedMessage}", Toast.LENGTH_SHORT).show()
+                    swipeRefreshLayout.isRefreshing = false // Stop the refresh animation
                 }
             }
         })
