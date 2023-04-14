@@ -9,6 +9,8 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.fragment.app.Fragment
 import okhttp3.*
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import org.json.JSONObject
 import java.io.IOException
 
 class SearchMedicineFragment : Fragment() {
@@ -47,12 +49,16 @@ class SearchMedicineFragment : Fragment() {
     }
 
     private fun fetchAndParseData(searchQuery: String) {
-        val url = "https://api.fda.gov/drug/event.json?search=patient.drug.medicinalproduct:$searchQuery&limit=10"
-
+        val url = "https://group8.dhruvaldhameliya.com/medicineAPI.php"
         val client = OkHttpClient()
+
+        val requestBody = JSONObject().apply {
+            put("medicineName", searchQuery)
+        }
 
         val request = Request.Builder()
             .url(url)
+            .post(RequestBody.create("application/json".toMediaTypeOrNull(), requestBody.toString()))
             .build()
 
         client.newCall(request).enqueue(object : Callback {
