@@ -133,6 +133,7 @@ class LogFragment : Fragment(), LogAdapter.OnItemClickListener{
             .addToBackStack(null)
             .commit()
     }
+    
 
 
 }
