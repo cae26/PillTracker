@@ -75,6 +75,7 @@ class LogFragment() : Fragment(), LogAdapter.OnItemClickListener {
         sendDoctorButton.setOnClickListener {
             // Get the selected item IDs
             val selectedIds = logAdapter.getSelectedLogIds()
+            if (selectedIds.isNotEmpty()) {
             // Show a confirmation dialog
             AlertDialog.Builder(requireContext())
                 .setTitle("Are you sure?")
@@ -86,9 +87,10 @@ class LogFragment() : Fragment(), LogAdapter.OnItemClickListener {
                 }
                 .setNegativeButton("No", null)
                 .show()
-
-
+        } else {
+            Toast.makeText(requireContext(), "No logs selected.", Toast.LENGTH_SHORT).show()
         }
+    }
 
         recyclerView = view.findViewById(R.id.logs)
         logAdapter = LogAdapter(listOf(), this)
