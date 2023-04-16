@@ -57,11 +57,11 @@ class MyPillsFragment : Fragment(), MyPillsAdapter.OnItemClickListener {
         button.setOnClickListener {
             // Get the selected item IDs
             var selectedIds = myPillsAdapter.getSelectedIds()
-
+            if (selectedIds.isNotEmpty()) {
             // Show a confirmation dialog
             AlertDialog.Builder(requireContext())
                 .setTitle("Are you sure?")
-                .setMessage("Do you want to send the selected IDs?")
+                .setMessage("Do you want to send the selected Pills?")
                 .setPositiveButton("Yes") { _, _ ->
                     // Send the selected IDs
                     sendSelectedIds(selectedIds)
@@ -70,6 +70,9 @@ class MyPillsFragment : Fragment(), MyPillsAdapter.OnItemClickListener {
                 }
                 .setNegativeButton("No", null)
                 .show()
+            } else {
+                Toast.makeText(requireContext(), "No Pills selected.", Toast.LENGTH_SHORT).show()
+            }
 
         }
         recyclerView = view.findViewById(R.id.recyclerView)
