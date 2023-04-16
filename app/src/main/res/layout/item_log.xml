@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:text="Medicine Name: "
         android:textColor="@color/purple_700"
-        android:textSize="16sp"
+        android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/checkBox"
         app:layout_constraintStart_toStartOf="@+id/dateTaken"
         app:layout_constraintTop_toTopOf="@+id/checkBox" />

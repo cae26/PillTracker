@@ -15,6 +15,10 @@ class MyPillsAdapter(
     private val selectedIds = ArrayList<Int>()
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        fun bind(medicine: MyPills) {
+
+        }
+
         val nameOfMedicine: TextView = view.findViewById(R.id.tv_medicine_name)
         val dose: TextView = view.findViewById(R.id.tv_dose)
         val timeToTakeMed: TextView = view.findViewById(R.id.tv_time_to_take_med)
@@ -29,11 +33,13 @@ class MyPillsAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val medicine = myPills[position]
+        holder.bind(medicine)
         holder.nameOfMedicine.text = medicine.nameOfMedicine
         holder.dose.text = medicine.dose
         holder.timeToTakeMed.text = medicine.timeToTakeMed
         holder.remainingMedicine.text = medicine.remainingMedicine
-
+        // Set the checked state of the checkbox based on the selectedLogs list
+        holder.checkBox.isChecked = selectedIds.contains(medicine.id)
         // Set up the click listener
         holder.itemView.setOnClickListener {
             listener.onItemClick(medicine)

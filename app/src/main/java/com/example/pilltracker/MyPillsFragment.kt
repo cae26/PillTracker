@@ -127,6 +127,8 @@ class MyPillsFragment : Fragment(), MyPillsAdapter.OnItemClickListener {
                 activity?.runOnUiThread {
                     myPillsAdapter.updateMyPills(medicines)
                     swipeRefreshLayout.isRefreshing = false // Stop the refresh animation
+
+                    swipeRefreshLayout.isRefreshing = false // Stop the refresh animation
                 }
             }
 
