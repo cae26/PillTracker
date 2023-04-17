@@ -13,4 +13,5 @@ val dateTaken: String,
 val additionalNotes: String
 ) : Parcelable {
     var isSelected: Boolean = false
+    var isRefreshing:Boolean = false
 }
