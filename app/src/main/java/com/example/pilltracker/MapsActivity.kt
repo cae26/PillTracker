@@ -4,6 +4,7 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.content.ContentValues.TAG
 import android.content.DialogInterface
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
 import androidx.appcompat.app.AppCompatActivity
@@ -26,16 +27,13 @@ import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.pilltracker.BuildConfig.MAPS_API_KEY
 
-import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.OnMapReadyCallback
-import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.example.pilltracker.databinding.ActivityMapsBinding
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.Marker
 import com.google.android.libraries.places.api.Places
@@ -44,6 +42,7 @@ import com.google.android.libraries.places.api.model.PlaceLikelihood
 import com.google.android.libraries.places.api.net.FindCurrentPlaceRequest
 import com.google.android.libraries.places.api.net.PlacesClient
 import com.google.android.gms.maps.GoogleMap.InfoWindowAdapter
+import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener
 import okhttp3.Headers
 import org.json.JSONException
 import org.json.JSONObject
@@ -59,7 +58,7 @@ private const val M_MAX_ENTRIES = 5
 
 private const val permissionCode = 1
 
-class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
+class MapsActivity : AppCompatActivity(), OnMapReadyCallback, OnMarkerClickListener {
 
     private lateinit var mMap: GoogleMap
     private lateinit var binding: ActivityMapsBinding
@@ -173,6 +172,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
 
+        mMap.uiSettings.isZoomControlsEnabled = true
+
         // Add a marker in Sydney and move the camera
         /*val sydney = LatLng(-34.0, 151.0)
         mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
@@ -208,6 +209,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         // Get the current location of the device and set the position of the map.
         getDeviceLocation()
+
+        mMap.setOnMarkerClickListener(this)
 
     }
 
@@ -405,12 +408,13 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     val pharmacyName = place.getString("name")
                     val pharmacyLat = place.getJSONObject("geometry").getJSONObject("location").getDouble("lat")
                     val pharmacyLng = place.getJSONObject("geometry").getJSONObject("location").getDouble("lng")
+                    val pharmacyId = place.getString("place_id")
                     val placeLatLng = LatLng(pharmacyLat, pharmacyLng)
 
-                    mMap.addMarker(MarkerOptions().position(placeLatLng).title(pharmacyName))
+                    mMap.addMarker(MarkerOptions().position(placeLatLng).title(pharmacyName).snippet(pharmacyId))
                 }
 
-                Log.e("CUSTOM---->", "__" + response)
+                //Log.e("CUSTOM---->", "__" + response)
             }, { e ->
                 Log.e("CUSTOM---->", e.message.toString())
 
@@ -420,5 +424,16 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         queue.add(stringRequest)
 
 
+    }
+
+    override fun onMarkerClick(p0: Marker): Boolean {
+
+        val intent = Intent(this@MapsActivity, MapsDetail::class.java)
+        //intent.putExtra("placeLat", p0.position.latitude)
+        //intent.putExtra("placeLng", p0.position.longitude)
+        intent.putExtra("pharmId", p0.snippet)
+        startActivity(intent)
+
+        return false
     }
 }
