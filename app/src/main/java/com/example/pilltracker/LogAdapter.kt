@@ -1,23 +1,28 @@
-package com.example.pilltracker
 
+package com.example.pilltracker
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.CheckBox
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 class LogAdapter(
     private var logs: List<Logs>,
-    private val listener: OnItemClickListener
+    private val listener: OnItemClickListener,
 ) : RecyclerView.Adapter<LogAdapter.ViewHolder>() {
 
+    private val idList = ArrayList<Int>()
+
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val checkBox: CheckBox =  view.findViewById(R.id.checkBox)
+
         val medicineName: TextView = view.findViewById(R.id.medicineName)
         val status: TextView = view.findViewById(R.id.status)
         val dateTaken: TextView = view.findViewById(R.id.dateTaken)
         val additionalNotes: TextView = view.findViewById(R.id.additionalNotes)
+        val checkBox: CheckBox = itemView.findViewById(R.id.checkBox)
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -32,10 +37,19 @@ class LogAdapter(
         holder.dateTaken.text = log.dateTaken
         holder.additionalNotes.text = log.additionalNotes
 
+        holder.checkBox.isChecked = log.isSelected
+
         holder.itemView.setOnClickListener {
-            // Handle item click/tick event here
-            holder.checkBox.isChecked = !holder.checkBox.isChecked
             listener.onItemClick(log)
+        }
+
+        holder.checkBox.setOnCheckedChangeListener { _, isChecked ->
+            log.isSelected = isChecked
+            if (isChecked) {
+                idList.add(log.id)
+            } else {
+                idList.remove(log.id)
+            }
         }
     }
 
@@ -43,7 +57,7 @@ class LogAdapter(
         return logs.size
     }
 
-
+    // Update the list of medicines and notify the adapter
     fun updatelogs(logs: List<Logs>) {
         this.logs = logs
         notifyDataSetChanged()
@@ -53,12 +67,20 @@ class LogAdapter(
     interface OnItemClickListener {
         fun onItemClick(log: Logs)
     }
-    fun selectAllItems(selected: Boolean) {
-        logs.forEach { it.isSelected = selected }
-        notifyDataSetChanged()
+
+    // Get the IDs of the selected items
+    fun getSelectedLogIds(): List<Int> {
+        return idList
     }
 
-
+    fun selectAll(isSelected: Boolean) {
+        idList.clear()
+        logs.forEach { log ->
+            log.isSelected = isSelected
+            if (isSelected) {
+                idList.add(log.id)
+            }
+        }
+        notifyDataSetChanged()
+    }
 }
-
-
