@@ -50,8 +50,31 @@ After finding an API to be used for getting medication details, implement the fo
   
     
   <img src='walkthrough_pillTracker_sprint_2.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
- # License
 
+ 
+  # Sprint 3
+  
+  - [x] User can delete items
+     * My pills 
+     * logs
+  - [x] User can swipe to refresh
+     * My pills
+     * Logs
+ - [x] User can select logs and send to doctor's email
+ - [x] User can see their profile info
+ - [x] Create `Nearby Pharmacy Detail` screen
+ - [x] Add marker listener for when user clicks on a nearby pharmacy marker
+     * When clicked, open `Nearby Pharmacy Detail` screen and display details according to layout of screen to user
+ - [x] Implement zoom in and out buttons for map
+ 
+ 
+  <img src='walkthrough_pillTracker_sprint3.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+  
+ #Doctor's email notification
+ 
+ <img src='email_notification.png' title='API' width='' alt='email notification' />
+  
+ # License
     Copyright [2023] [Samikshya Poudel, Carlos Espana, Bret Seelall, Temitayo Ilori]
 
     Licensed under the Apache License, Version 2.0 (the "License");
