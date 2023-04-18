@@ -55,6 +55,7 @@ private const val DEFAULT_ZOOM = 14
 
 private const val KEY_CAMERA_POSITION = "camera_position"
 private const val KEY_LOCATION = "location"
+
 // [END maps_current_place_state_keys]
 
 // Used for selecting the current place.
