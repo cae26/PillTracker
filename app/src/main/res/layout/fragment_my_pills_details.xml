@@ -91,5 +91,12 @@
             android:textColor="@color/black"
             tools:text="Take with food." />
 
+        <Button
+            android:id="@+id/send_notification_btn"
+            android:layout_width="255dp"
+            android:layout_height="wrap_content"
+            android:text="Send Notification" />
+
+
     </LinearLayout>
 </ScrollView>
