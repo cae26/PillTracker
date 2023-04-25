@@ -1,23 +1,129 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
 
-    <EditText
-        android:id="@+id/search_edit_text"
+    <AutoCompleteTextView
+        android:id="@+id/search_auto_complete_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Enter search query here"
+        android:completionThreshold="1"
         android:inputType="text"
         android:maxLines="1"
+        android:imeOptions="actionSearch"
+        android:singleLine="true"
+        android:textColor="@android:color/black"
+        android:textSize="16sp"
         android:padding="16dp" />
 
-    <Button
-        android:id="@+id/search_button"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/search_button"
+            android:layout_width="174dp"
+            android:layout_height="wrap_content"
+            android:text="Search" />
+
+        <Button
+            android:id="@+id/add_button"
+            android:layout_width="192dp"
+            android:layout_height="wrap_content"
+            android:text="Add" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/search_result_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Search Results"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:padding="16dp"/>
+
+    <TextView
+        android:id="@+id/drug_name_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="end|center_vertical"
-        android:layout_marginEnd="16dp"
-        android:padding="16dp"
-        android:text="Search" />
+        android:text="Drug Name: "
+        android:textSize="16sp"
+        android:textStyle="bold" />
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/drug_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textColor="@android:color/black"/>
+
+    <TextView
+        android:id="@+id/medical_condition_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Medical Condition: "
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/medical_condition"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textColor="@android:color/black"/>
+
+    <TextView
+        android:id="@+id/generic_name_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Generic Name: "
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/generic_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textColor="@android:color/black"/>
+
+    <TextView
+        android:id="@+id/drug_class_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Drug Class: "
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/drug_class"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textColor="@android:color/black"/>
+
+    <TextView
+        android:id="@+id/drug_link_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Drug Link:"
+        android:textColor="@android:color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_marginTop="16dp"/>
+
+    <TextView
+        android:id="@+id/drug_link"
+        android:layout_width="354dp"
+        android:layout_height="86dp"
+        android:autoLink="web"
+        android:padding="16dp"
+        android:textColor="@android:color/holo_blue_dark"
+        android:textSize="16sp" />
+
+</LinearLayout>
