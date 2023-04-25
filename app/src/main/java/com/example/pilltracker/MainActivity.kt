@@ -1,13 +1,17 @@
 package com.example.pilltracker
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
 class MainActivity : AppCompatActivity(), LoginFragment.LoginSuccessListener {
+
     private var loggedInUsername: String? = null
     private var loggedInPassword: String? = null
+    private var isOptionsMenuEnabled = false // Add this flag
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,11 +24,12 @@ class MainActivity : AppCompatActivity(), LoginFragment.LoginSuccessListener {
 
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottom_navigation)
 
-        // Remove the initialization of myPillsPage from here
-        val logPage: Fragment = LogFragment()
         val pharmacyPage: Fragment = PharmacyFragment()
 
         bottomNavigationView.setOnItemSelectedListener { item ->
+            // Check if Options Menu is enabled
+            if (!isOptionsMenuEnabled) return@setOnItemSelectedListener false
+
             val fragment: Fragment
             when (item.itemId) {
                 R.id.nav_myPills -> {
@@ -53,7 +58,26 @@ class MainActivity : AppCompatActivity(), LoginFragment.LoginSuccessListener {
         }
 
 
-        //disableNavigationButtons()
+        disableNavigationButtons()
+        disableOptionsMenu() // Add this line
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        if (isOptionsMenuEnabled) { // Check if Options Menu is enabled
+            menuInflater.inflate(R.menu.options_menu, menu)
+            return true
+        }
+        return false // Return false if Options Menu is disabled
+    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.menu_settings -> {
+                val profileFragment = ProfileFragment.newInstance(loggedInUsername ?: "defaultUsername")
+                replaceFragment(profileFragment)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     override fun onLoginSuccess(username: String, password: String) {
@@ -61,6 +85,8 @@ class MainActivity : AppCompatActivity(), LoginFragment.LoginSuccessListener {
         loggedInPassword = password
 
         enableNavigationButtons()
+        enableOptionsMenu() // Add this line
+
         val logPage= LogFragment.newInstance(loggedInUsername!!)
         val myPillsPage = MyPillsFragment.newInstance(loggedInUsername!!)
         replaceFragment(myPillsPage)
@@ -86,5 +112,15 @@ class MainActivity : AppCompatActivity(), LoginFragment.LoginSuccessListener {
         bottomNavigationView.menu.findItem(R.id.nav_log).isEnabled = true
         bottomNavigationView.menu.findItem(R.id.nav_pharmacy).isEnabled = true
         bottomNavigationView.selectedItemId = R.id.nav_myPills
+    }
+
+    private fun disableOptionsMenu() {
+        isOptionsMenuEnabled = false
+        invalidateOptionsMenu()
+    }
+
+    private fun enableOptionsMenu() {
+        isOptionsMenuEnabled = true
+        invalidateOptionsMenu()
     }
 }
