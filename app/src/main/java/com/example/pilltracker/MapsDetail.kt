@@ -1,7 +1,9 @@
 package com.example.pilltracker
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.pilltracker.BuildConfig.MAPS_API_KEY
@@ -25,8 +27,24 @@ class MapsDetail : AppCompatActivity() {
         val pharmacyAddress = findViewById<TextView>(R.id.pharmacyAddressTV)
         val pharmacyNumber = findViewById<TextView>(R.id.pharmacyPhoneNumberTV)
         val pharmacyOpening = findViewById<TextView>(R.id.pharmacyOpeningHoursTV)
+        val homePharmacyButton = findViewById<Button>(R.id.homePharmacyButton)
 
         val pharmacyId = intent.getStringExtra("pharmId")
+
+
+        // Testing out sending data back to fragment for home pharmacy
+        /*val mFragmentManager = supportFragmentManager
+        val mFragmentTransaction = mFragmentManager.beginTransaction()
+        val mFragment = PharmacyFragment()
+
+        homePharmacyButton.setOnClickListener {
+            val mBundle = Bundle()
+            mBundle.putString("pharmId", pharmacyId)
+            mFragment.arguments = mBundle
+            //val intent = Intent(this@MapsDetail, PharmacyFragment::class.java)
+            //intent.putExtra("pharmId", pharmacyId)
+            //startActivity(intent)
+        }*/
 
 
         Places.initialize(applicationContext, MAPS_API_KEY)
