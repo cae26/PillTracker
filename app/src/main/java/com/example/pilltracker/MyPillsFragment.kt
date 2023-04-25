@@ -45,10 +45,10 @@ class MyPillsFragment : Fragment(), MyPillsAdapter.OnItemClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val button = view.findViewById<Button>(R.id.buttonDelete)
-
+        val passedUsername1 = arguments?.getString(ARG_USERNAME)
         val button2 = view.findViewById<Button>(R.id.button)
         button2.setOnClickListener {
-            val fragment = SearchMedicineFragment.newInstance()
+            val fragment = SearchMedicineFragment.newInstance(passedUsername1!!)
             requireActivity().supportFragmentManager.beginTransaction()
                 .replace(R.id.pill_tracker_frame_layout, fragment)
                 .addToBackStack(null)

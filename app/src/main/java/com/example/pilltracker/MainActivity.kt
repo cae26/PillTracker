@@ -17,10 +17,10 @@ class MainActivity : AppCompatActivity(), LoginFragment.LoginSuccessListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        //PillTrackerAPI().run()
+        PillTrackerAPI().run()
 
-        //val logInPage = LoginFragment.newInstance(this)
-        //replaceFragment(logInPage)
+        val logInPage = LoginFragment.newInstance(this)
+        replaceFragment(logInPage)
 
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottom_navigation)
 
