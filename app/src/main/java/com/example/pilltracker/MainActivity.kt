@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity(), LoginFragment.LoginSuccessListener {
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottom_navigation)
 
         // Remove the initialization of myPillsPage from here
-       // val logPage: Fragment = LogFragment()
+        val logPage: Fragment = LogFragment()
         val pharmacyPage: Fragment = PharmacyFragment()
 
         bottomNavigationView.setOnItemSelectedListener { item ->
