@@ -1,10 +1,12 @@
 package com.example.pilltracker
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.messaging.FirebaseMessaging
 
 
 class MainActivity : AppCompatActivity(), LoginFragment.LoginSuccessListener {
@@ -83,6 +85,9 @@ class MainActivity : AppCompatActivity(), LoginFragment.LoginSuccessListener {
     override fun onLoginSuccess(username: String, password: String) {
         loggedInUsername = username
         loggedInPassword = password
+
+        FirebaseMessaging.getInstance().subscribeToTopic(username);
+        Log.e("CUSTOM---->",username)
 
         enableNavigationButtons()
         enableOptionsMenu() // Add this line
