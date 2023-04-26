@@ -1,5 +1,7 @@
 package com.example.pilltracker
+
 import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -21,9 +23,8 @@ class LoginFragment : Fragment() {
     private lateinit var logsAdapter: LogAdapter
 
     // Initialize Shared Preferences
-    private val sharedPreferences by lazy {
-        requireContext().getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
-    }
+    lateinit var sharedPreferences: SharedPreferences
+
 
     interface LoginSuccessListener {
         fun onLoginSuccess(username: String, password: String)
@@ -47,6 +48,8 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        sharedPreferences = activity!!.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
+
         val usernameEditText: EditText = view.findViewById(R.id.edittext_username)
         val passwordEditText: EditText = view.findViewById(R.id.edittext_password)
         val loginButton: Button = view.findViewById(R.id.button_login)
@@ -58,19 +61,28 @@ class LoginFragment : Fragment() {
             // Validate inputs
             if (username.isEmpty() || password.isEmpty()) {
                 // Show an error message to the user
-                Toast.makeText(requireContext(), "Username and password cannot be empty", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    requireContext(),
+                    "Username and password cannot be empty",
+                    Toast.LENGTH_SHORT
+                ).show()
             } else {
                 loginUser(username, password) { jsonResponse ->
                     if (jsonResponse.getBoolean("status")) {
                         // Save username and password in Shared Preferences after successful login
-                        with(sharedPreferences.edit()) {
-                            putString("username", username)
-                            putString("password", password)
-                            apply()
-                        }
+                        val editor = sharedPreferences.edit()
+                        editor.putString("username", username)
+                        editor.putString("password", password)
+                        editor.apply()
+                        editor.commit()
+
                         loginSuccessListener.onLoginSuccess(username, password)
                     } else {
-                        Toast.makeText(requireContext(), "Login failed. Please check your credentials.", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            requireContext(),
+                            "Login failed. Please check your credentials.",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 }
             }
@@ -108,7 +120,12 @@ class LoginFragment : Fragment() {
 
         val request = Request.Builder()
             .url(url)
-            .post(RequestBody.create("application/json".toMediaTypeOrNull(), requestBody.toString()))
+            .post(
+                RequestBody.create(
+                    "application/json".toMediaTypeOrNull(),
+                    requestBody.toString()
+                )
+            )
             .build()
 
         client.newCall(request).enqueue(object : Callback {
@@ -124,7 +141,11 @@ class LoginFragment : Fragment() {
             override fun onFailure(call: Call, e: IOException) {
                 activity?.runOnUiThread {
                     Log.e("Error", "Failed to fetch data: ${e.message}")
-                    Toast.makeText(requireContext(), "Error: ${e.localizedMessage}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        requireContext(),
+                        "Error: ${e.localizedMessage}",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
         })

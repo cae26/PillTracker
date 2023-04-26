@@ -63,7 +63,15 @@ class AddMedicineFragment : Fragment() {
             val pillCount = pillCountEditText.text.toString()
             val hour = timePicker.hour
             val minute = timePicker.minute
-            val timeToTakeMed = "$hour:$minute"
+            val timeToTakeMed = if (timePicker.is24HourView) {
+                // For 24-hour format, simply concatenate the hour and minute values
+                String.format("%02d:%02d", hour, minute)
+            } else {
+                // For 12-hour format, determine whether the selected hour value corresponds to the AM or PM time period
+                val period = if (hour < 12) "AM" else "PM"
+                val displayHour = if (hour == 0 || hour == 12) 12 else hour % 12
+                String.format("%d:%02d %s", displayHour, minute, period)
+            }
 
             val json = JSONObject()
             json.put("userName", username)
@@ -73,8 +81,9 @@ class AddMedicineFragment : Fragment() {
             json.put("additionalNotes", additionalNotes)
             json.put("remainingMedicine", pillCount)
 
-            val url = "https://group8.dhruvaldhameliya.com/my_pills.php"
+            val url = "https://group8.dhruvaldhameliya.com/add_medication.php"
             val requestQueue = Volley.newRequestQueue(requireContext())
+            Log.d(TAG, "JSON object: $json")
 
             val request = JsonObjectRequest(
                 Request.Method.POST, url, json,
@@ -89,8 +98,8 @@ class AddMedicineFragment : Fragment() {
                     // Handle error
                     Log.e(TAG, "Error: ${error.message}")
                     Log.d(TAG, "Response:")
-                    val navController = findNavController()
-                    navController.navigate(R.id.nav_myPills)
+//                    val navController = findNavController()
+//                    navController.navigate(R.id.nav_myPills)
                 }
             )
 
