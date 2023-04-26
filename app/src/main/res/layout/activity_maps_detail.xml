@@ -4,19 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PharmacyFragment">
+    tools:context=".MapsDetail">
 
-    <Button
-        android:id="@+id/accessMapButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Click to Access Map"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/homePharmacyNameTV"
+        android:id="@+id/pharmacyNameTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingStart="5dp"
@@ -30,7 +22,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/homePharmacyAddressTV"
+        android:id="@+id/pharmacyAddressTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -39,11 +31,11 @@
         android:paddingEnd="5dp"
         android:paddingBottom="5dp"
         android:text="N/A"
-        app:layout_constraintStart_toEndOf="@+id/homePharmAddressText"
-        app:layout_constraintTop_toBottomOf="@+id/homePharmacyNameTV" />
+        app:layout_constraintStart_toEndOf="@+id/addressText"
+        app:layout_constraintTop_toBottomOf="@+id/pharmacyNameTV" />
 
     <TextView
-        android:id="@+id/homePharmacyPhoneNumberTV"
+        android:id="@+id/pharmacyPhoneNumberTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
@@ -53,11 +45,11 @@
         android:paddingBottom="5dp"
         android:text="N/A"
         android:textStyle="italic"
-        app:layout_constraintStart_toEndOf="@+id/homePhoneNumberText"
-        app:layout_constraintTop_toBottomOf="@+id/homePharmacyAddressTV" />
+        app:layout_constraintStart_toEndOf="@+id/phoneNumberText"
+        app:layout_constraintTop_toBottomOf="@+id/pharmacyAddressTV" />
 
     <TextView
-        android:id="@+id/homePharmacyOpeningHoursTV"
+        android:id="@+id/pharmacyOpeningHoursTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingStart="5dp"
@@ -66,10 +58,10 @@
         android:paddingBottom="5dp"
         android:text="N/A"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/homeOpeningHoursText" />
+        app:layout_constraintTop_toBottomOf="@+id/openingHoursText" />
 
     <TextView
-        android:id="@+id/homePharmAddressText"
+        android:id="@+id/addressText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -80,10 +72,10 @@
         android:text="Address:"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/homePharmacyNameTV" />
+        app:layout_constraintTop_toBottomOf="@+id/pharmacyNameTV" />
 
     <TextView
-        android:id="@+id/homePhoneNumberText"
+        android:id="@+id/phoneNumberText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
@@ -94,10 +86,10 @@
         android:text="Phone Number:"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/homePharmAddressText" />
+        app:layout_constraintTop_toBottomOf="@+id/addressText" />
 
     <TextView
-        android:id="@+id/homeOpeningHoursText"
+        android:id="@+id/openingHoursText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
@@ -108,8 +100,16 @@
         android:text="Opening Schedule:"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/homePhoneNumberText" />
+        app:layout_constraintTop_toBottomOf="@+id/phoneNumberText" />
 
-
+    <Button
+        android:id="@+id/homePharmacyButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Make Your Home Pharmacy"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pharmacyOpeningHoursTV" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

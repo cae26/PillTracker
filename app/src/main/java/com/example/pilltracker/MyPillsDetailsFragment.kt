@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 
 class MyPillsDetailsFragment : Fragment() {
@@ -14,11 +15,13 @@ class MyPillsDetailsFragment : Fragment() {
     private lateinit var tvTimeToTakeMed: TextView
     private lateinit var tvAdditionalNotes: TextView
     private lateinit var tvRemainingMedicine: TextView
+    private lateinit var pushNotificationBtn: Button
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         return inflater.inflate(R.layout.fragment_my_pills_details, container, false)
     }
 
@@ -30,6 +33,8 @@ class MyPillsDetailsFragment : Fragment() {
         tvTimeToTakeMed = view.findViewById(R.id.tv_time_to_take_med)
         tvAdditionalNotes = view.findViewById(R.id.tv_additional_notes)
         tvRemainingMedicine = view.findViewById(R.id.tv_remaining_medicine)
+        pushNotificationBtn = view.findViewById<Button>(R.id.send_notification_btn)
+
 
         // Retrieve medicine data from arguments and populate UI elements
         val myPill = arguments?.getParcelable<MyPills>(ARG_MEDICINE)
@@ -39,7 +44,12 @@ class MyPillsDetailsFragment : Fragment() {
             tvTimeToTakeMed.text = myPill.timeToTakeMed
             tvAdditionalNotes.text = myPill.additionalNotes
             tvRemainingMedicine.text = myPill.remainingMedicine
+            pushNotificationBtn.setOnClickListener {
+                AddMedication()
+            }
         }
+
+
     }
 
     companion object {
@@ -53,4 +63,6 @@ class MyPillsDetailsFragment : Fragment() {
             return fragment
         }
     }
+
+
 }

@@ -4,6 +4,7 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.content.ContentValues.TAG
 import android.content.DialogInterface
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
 import androidx.appcompat.app.AppCompatActivity
@@ -26,16 +27,14 @@ import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.pilltracker.BuildConfig.MAPS_API_KEY
 
-import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.OnMapReadyCallback
-import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.example.pilltracker.databinding.ActivityMapsBinding
 import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.common.api.Status
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.Marker
 import com.google.android.libraries.places.api.Places
@@ -44,6 +43,10 @@ import com.google.android.libraries.places.api.model.PlaceLikelihood
 import com.google.android.libraries.places.api.net.FindCurrentPlaceRequest
 import com.google.android.libraries.places.api.net.PlacesClient
 import com.google.android.gms.maps.GoogleMap.InfoWindowAdapter
+import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener
+import com.google.android.libraries.places.api.model.TypeFilter
+import com.google.android.libraries.places.widget.AutocompleteSupportFragment
+import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
 import okhttp3.Headers
 import org.json.JSONException
 import org.json.JSONObject
@@ -52,6 +55,7 @@ private const val DEFAULT_ZOOM = 14
 
 private const val KEY_CAMERA_POSITION = "camera_position"
 private const val KEY_LOCATION = "location"
+
 // [END maps_current_place_state_keys]
 
 // Used for selecting the current place.
@@ -59,7 +63,7 @@ private const val M_MAX_ENTRIES = 5
 
 private const val permissionCode = 1
 
-class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
+class MapsActivity : AppCompatActivity(), OnMapReadyCallback, OnMarkerClickListener {
 
     private lateinit var mMap: GoogleMap
     private lateinit var binding: ActivityMapsBinding
@@ -93,6 +97,29 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         Places.initialize(applicationContext, MAPS_API_KEY)
         placesClient = Places.createClient(this)
+
+        // Initialize the AutocompleteSupportFragment.
+        val autocompleteFragment =
+            supportFragmentManager.findFragmentById(R.id.autocomplete_fragment)
+                    as AutocompleteSupportFragment
+
+        // Specify the types of place data to return.
+        autocompleteFragment.setPlaceFields(listOf(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG))
+
+        // Set up a PlaceSelectionListener to handle the response.
+        autocompleteFragment.setOnPlaceSelectedListener(object : PlaceSelectionListener {
+            override fun onPlaceSelected(place: Place) {
+                // TODO: Get info about the selected place.
+                mMap.addMarker(MarkerOptions().position(place.latLng).title(place.name).snippet(place.id))
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(place.latLng, DEFAULT_ZOOM.toFloat()))
+                Log.i(TAG, "Place: ${place.name}, ${place.id}")
+            }
+
+            override fun onError(status: Status) {
+                // TODO: Handle the error.
+                Log.i(TAG, "An error occurred: $status")
+            }
+        })
 
 
         //binding = ActivityMapsBinding.inflate(layoutInflater)
@@ -173,6 +200,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
 
+        mMap.uiSettings.isZoomControlsEnabled = true
+
         // Add a marker in Sydney and move the camera
         /*val sydney = LatLng(-34.0, 151.0)
         mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
@@ -208,6 +237,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         // Get the current location of the device and set the position of the map.
         getDeviceLocation()
+
+        mMap.setOnMarkerClickListener(this)
 
     }
 
@@ -245,13 +276,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                         // Set the map's camera position to the current location of the device.
                         lastKnownLocation = task.result
                         if (lastKnownLocation != null) {
-                            mMap.moveCamera(
-                                CameraUpdateFactory.newLatLngZoom(
-                                    LatLng(
-                                        lastKnownLocation!!.latitude, lastKnownLocation!!.longitude
-                                    ), DEFAULT_ZOOM.toFloat()
-                                )
-                            )
+                            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(lastKnownLocation!!.latitude, lastKnownLocation!!.longitude), DEFAULT_ZOOM.toFloat()))
                             googleMapsApi(
                                 LatLng(
                                     lastKnownLocation!!.latitude, lastKnownLocation!!.longitude
@@ -405,12 +430,13 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     val pharmacyName = place.getString("name")
                     val pharmacyLat = place.getJSONObject("geometry").getJSONObject("location").getDouble("lat")
                     val pharmacyLng = place.getJSONObject("geometry").getJSONObject("location").getDouble("lng")
+                    val pharmacyId = place.getString("place_id")
                     val placeLatLng = LatLng(pharmacyLat, pharmacyLng)
 
-                    mMap.addMarker(MarkerOptions().position(placeLatLng).title(pharmacyName))
+                    mMap.addMarker(MarkerOptions().position(placeLatLng).title(pharmacyName).snippet(pharmacyId))
                 }
 
-                Log.e("CUSTOM---->", "__" + response)
+                //Log.e("CUSTOM---->", "__" + response)
             }, { e ->
                 Log.e("CUSTOM---->", e.message.toString())
 
@@ -420,5 +446,16 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         queue.add(stringRequest)
 
 
+    }
+
+    override fun onMarkerClick(p0: Marker): Boolean {
+
+        val intent = Intent(this@MapsActivity, MapsDetail::class.java)
+        //intent.putExtra("placeLat", p0.position.latitude)
+        //intent.putExtra("placeLng", p0.position.longitude)
+        intent.putExtra("pharmId", p0.snippet)
+        startActivity(intent)
+
+        return false
     }
 }

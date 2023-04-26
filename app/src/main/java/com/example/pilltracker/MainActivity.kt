@@ -59,6 +59,7 @@ class MainActivity : AppCompatActivity(), LoginFragment.LoginSuccessListener {
             true
         }
 
+
         disableNavigationButtons()
         disableOptionsMenu() // Add this line
     }

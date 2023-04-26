@@ -1,4 +1,5 @@
 package com.example.pilltracker
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -18,6 +19,11 @@ class LoginFragment : Fragment() {
     private lateinit var loginSuccessListener: LoginSuccessListener
     private lateinit var recyclerView: RecyclerView
     private lateinit var logsAdapter: LogAdapter
+
+    // Initialize Shared Preferences
+    private val sharedPreferences by lazy {
+        requireContext().getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
+    }
 
     interface LoginSuccessListener {
         fun onLoginSuccess(username: String, password: String)
@@ -56,10 +62,35 @@ class LoginFragment : Fragment() {
             } else {
                 loginUser(username, password) { jsonResponse ->
                     if (jsonResponse.getBoolean("status")) {
+                        // Save username and password in Shared Preferences after successful login
+                        with(sharedPreferences.edit()) {
+                            putString("username", username)
+                            putString("password", password)
+                            apply()
+                        }
                         loginSuccessListener.onLoginSuccess(username, password)
                     } else {
                         Toast.makeText(requireContext(), "Login failed. Please check your credentials.", Toast.LENGTH_SHORT).show()
                     }
+                }
+            }
+        }
+        val createAccountButton: Button = view.findViewById(R.id.button_create_account)
+        createAccountButton.setOnClickListener {
+            val createAccountFragment = CreateAccountFragment()
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.pill_tracker_frame_layout, createAccountFragment)
+                .addToBackStack(null)
+                .commit()
+        }
+
+        // Check if the user is already logged in every time the app is opened
+        val username = sharedPreferences.getString("username", "")
+        val password = sharedPreferences.getString("password", "")
+        if (!username.isNullOrEmpty() && !password.isNullOrEmpty()) {
+            loginUser(username, password) { jsonResponse ->
+                if (jsonResponse.getBoolean("status")) {
+                    loginSuccessListener.onLoginSuccess(username, password)
                 }
             }
         }

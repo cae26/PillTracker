@@ -61,6 +61,14 @@
             android:background="@drawable/round_rectangle"
             android:text="Login"
             android:textColor="@color/white" />
-
+        <Button
+          android:id="@+id/button_create_account"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="16dp"
+          android:background="@drawable/round_rectangle"
+          android:textColor="@color/white" 
+          android:text="Create Account" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
+
