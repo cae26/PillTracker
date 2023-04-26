@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "494712789340",
+    "project_id": "fcmpushnotification-26b93",
+    "storage_bucket": "fcmpushnotification-26b93.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:494712789340:android:0eec03e8690f68ed1b0999",
+        "android_client_info": {
+          "package_name": "com.example.pilltracker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "494712789340-9emno89jcs111nl7abhe8prtj8cf93cj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBAa_njP1WrJ_jJsC09MklpsMnrLq-aJVY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "494712789340-9emno89jcs111nl7abhe8prtj8cf93cj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
