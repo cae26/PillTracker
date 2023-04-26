@@ -63,8 +63,11 @@ class LogFragment() : Fragment(), LogAdapter.OnItemClickListener {
                         deleteSelectedLogs(selectedIds)
                         println(selectedIds.toString())
                     }
+
                     .setNegativeButton("No", null)
                     .show()
+                
+
             } else {
                 Toast.makeText(requireContext(), "No logs selected.", Toast.LENGTH_SHORT).show()
             }
@@ -87,6 +90,7 @@ class LogFragment() : Fragment(), LogAdapter.OnItemClickListener {
                 }
                 .setNegativeButton("No", null)
                 .show()
+
         } else {
             Toast.makeText(requireContext(), "No logs selected.", Toast.LENGTH_SHORT).show()
         }
@@ -215,24 +219,7 @@ class LogFragment() : Fragment(), LogAdapter.OnItemClickListener {
             }
         })
     }
-    private fun deleteall() {
-        val url = "https://group8.dhruvaldhameliya.com/delete_all_logs.php"
-        val client = OkHttpClient()
 
-        val request = Request.Builder()
-            .url(url)
-            .build()
-
-        client.newCall(request).enqueue(object : Callback {
-            override fun onResponse(call: Call, response: Response) {
-                // Handle successful response
-            }
-
-            override fun onFailure(call: Call, e: IOException) {
-                // Handle error
-            }
-        })
-    }
     override fun onItemClick(log: Logs) {
         val fragment = AddNotesFragment.newInstance(log)
         requireActivity().supportFragmentManager.beginTransaction()
@@ -243,6 +230,10 @@ class LogFragment() : Fragment(), LogAdapter.OnItemClickListener {
 
 
 
+}
+
+private fun <E> List<E>.clear() {
+    TODO("Not yet implemented")
 }
 
 
