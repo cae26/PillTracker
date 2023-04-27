@@ -9,4 +9,11 @@
     <color name="white">#FFFFFFFF</color>
     <color name="fun_gradient_start">#FF9800</color>
     <color name="fun_gradient_end">#FFC107</color>
+    <color name="red">#FF0000</color>
+    <color name="green">#228B22</color>
+    <color name="background_color">#F5F5F5</color>
+    <color name="text_color">#4A4A4A</color>
+    <color name="button_color">#3F51B5</color>
+    <color name="edit_text_background">#E0E0E0</color>
+
 </resources>
