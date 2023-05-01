@@ -89,8 +89,25 @@ After finding an API to be used for getting medication details, implement the fo
 - [x] Implemented API points for add medication, autocomplete, search medicine, inserting and retrieving place id for google maps add home pharmacy feature
 - [x] Added some visual customizations for my pills and log page
   
-  
-  <img src='walkthrough_pillTracker_sprint4.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+   # Sprint 5
+   
+   Make some changes to the pharmacy fragment and activity
+
+- [x] Add picture of pharmacy (if it is available) to page layout
+- [x] Change names of buttons
+- [x] Change layout of pharmacy fragment and detail for opening hours
+- [x] Create a `Create Account` screen
+- [x] Create layout for `Create Account` screen
+     * Input for User's first and last name
+     * Input for a username
+     * Input for password
+     * Input for users date of birth
+- [x] user receives notification at the time to take medication
+- [x] The notification creates a log entry for "Taken" or "Not Taken"
+- [x] Add a theme to the app 
+   
+   
+  <img src='walkthrough_pillTracker_sprint5.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
   
   
  # License
