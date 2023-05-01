@@ -90,8 +90,7 @@ After finding an API to be used for getting medication details, implement the fo
 - [x] Added some visual customizations for my pills and log page
   
    # Sprint 5
-   
-   Make some changes to the pharmacy fragment and activity
+  
 
 - [x] Add picture of pharmacy (if it is available) to page layout
 - [x] Change names of buttons
