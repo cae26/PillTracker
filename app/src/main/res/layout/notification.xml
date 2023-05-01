@@ -51,25 +51,26 @@
 
                 <Button
                     android:id="@+id/takenButton"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="8dp"
+                    android:layout_centerVertical="true"
                     android:text="Taken"
-                    android:layout_weight="1"
-                    android:backgroundTint="@color/green"
-                    android:textColor="@color/white"
-                    android:textStyle="bold"
-                    android:layout_marginRight="10dp"/>
+                    android:textColor="@android:color/white"
+                    android:background="@drawable/ic_taken" />
 
                 <Button
                     android:id="@+id/notTakenButton"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_toEndOf="@id/takenButton"
+                    android:layout_marginStart="8dp"
+                    android:layout_centerVertical="true"
                     android:text="Not Taken"
-                    android:layout_weight="1"
-                    android:backgroundTint="@color/red"
-                    android:textColor="@color/white"
-                    android:textStyle="bold"
-                    android:layout_marginLeft="10dp"/>
+                    android:textColor="@android:color/white"
+                    android:background="@drawable/ic_not_taken" />
+
 
             </LinearLayout>
 
