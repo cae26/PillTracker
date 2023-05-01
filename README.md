@@ -93,7 +93,7 @@ After finding an API to be used for getting medication details, implement the fo
   
 
 - [x] Add picture of pharmacy (if it is available) to page layout
-- [x] Change names of buttons
+- [x] Change names of buttons on pharmacy page
 - [x] Change layout of pharmacy fragment and detail for opening hours
 - [x] Create a `Create Account` screen
 - [x] Create layout for `Create Account` screen
