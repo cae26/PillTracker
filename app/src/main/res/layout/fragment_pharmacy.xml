@@ -14,7 +14,7 @@
         android:text="View Nearby Pharmacies"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"/>
 
     <TextView
         android:id="@+id/homePharmacyNameTV"
@@ -42,6 +42,7 @@
         android:paddingBottom="5dp"
         android:text="N/A"
         android:textSize="16sp"
+        android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/homePharmAddressText" />
 
@@ -56,6 +57,7 @@
         android:text="N/A"
         android:textSize="16sp"
         android:textStyle="italic"
+        android:textColor="@color/black"
         app:layout_constraintStart_toEndOf="@+id/homePhoneNumberText"
         app:layout_constraintTop_toBottomOf="@+id/homePharmacyAddressTV" />
 
@@ -68,6 +70,7 @@
         android:paddingEnd="5dp"
         android:text="N/A"
         android:textSize="16sp"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/homeOpeningHoursText" />
@@ -83,6 +86,7 @@
         android:text="Address: "
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
+        android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@+id/homePharmacyNameTV" />
 
     <TextView
@@ -121,6 +125,8 @@
         android:layout_height="wrap_content"
         android:text="Your Home Pharmacy"
         android:textSize="24sp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -143,6 +149,8 @@
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:textStyle="normal"
+        android:textColor="@color/black"
         app:layout_constraintTop_toBottomOf="@+id/homePharmacyOpeningHoursTV" />
 
     <TextView
