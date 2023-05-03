@@ -18,5 +18,7 @@
     <color name="banner">#A72365</color>
     <color name="teal">#3D9799</color>
     <color name="edit_text_background">#E0E0E0</color>
+    <color name="my_color">#2196F3</color>
+
 
 </resources>

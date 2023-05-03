@@ -23,6 +23,7 @@
         android:inputType="text"
         android:hint="Enter your name"
         android:padding="10dp"
+        android:textColor="@color/black"
         android:background="@drawable/edit_text_background"/>
 
     <TextView
@@ -43,6 +44,7 @@
         android:inputType="text"
         android:hint="Enter your doctor's name"
         android:padding="10dp"
+        android:textColor="@color/black"
         android:background="@drawable/edit_text_background" />
 
     <TextView
@@ -63,6 +65,7 @@
         android:inputType="phone"
         android:hint="Enter your doctor's phone number"
         android:padding="10dp"
+        android:textColor="@color/black"
         android:background="@drawable/edit_text_background" />
 
 </LinearLayout>

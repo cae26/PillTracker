@@ -7,6 +7,13 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import okhttp3.*
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import org.json.JSONArray
+import org.json.JSONObject
+import java.io.IOException
+import java.net.HttpURLConnection
+import java.net.URL
 
 class ProfileFragment : Fragment() {
 
@@ -49,11 +56,42 @@ class ProfileFragment : Fragment() {
         val doctorNumberTextView = view.findViewById<TextView>(R.id.doctorNumberTextView)
         val doctorEmailTextView = view.findViewById<TextView>(R.id.doctorEmailTextView)
 
-        // Set the values for the views
-        nameTextView.text = "User $username"
-        doctorNameTextView.text = "Doctor Name"
-        doctorNumberTextView.text = "123-456-7890"
-        doctorEmailTextView.text = "doctor@example.com"
+        // Make an HTTP request to the PHP file and retrieve the response
+        val url = "https://group8.dhruvaldhameliya.com/retrive_profile_info.php"
+
+        val client = OkHttpClient()
+
+        val requestBody = JSONObject().apply {
+            put("userName", username)
+        }
+
+        val request = Request.Builder()
+            .url(url)
+            .post(RequestBody.create("application/json".toMediaTypeOrNull(), requestBody.toString()))
+            .build()
+
+        client.newCall(request).enqueue(object : Callback {
+            override fun onResponse(call: Call, response: Response) {
+                val responseBody = response.body?.string()
+                val jsonResponse = JSONArray(responseBody)
+                if (jsonResponse.length() > 0) {
+                    val profileData = jsonResponse.getJSONObject(0)
+                    nameTextView.text = profileData.getString("firstName") +" " + profileData.getString("lastName")
+                    doctorNameTextView.text = profileData.getString("doctorName")
+                    if (profileData.has("doctorPhone")) {
+                        doctorNumberTextView.text = profileData.getString("doctorPhone")
+                    }
+                    if (profileData.has("doctorEmail")) {
+                        doctorEmailTextView.text = profileData.getString("doctorEmail")
+                    }
+                }
+            }
+
+
+            override fun onFailure(call: Call, e: IOException) {
+                // Handle the failure as needed
+            }
+        })
 
         // Add a click listener to the edit profile button
         val editProfileButton = view.findViewById<Button>(R.id.editProfileButton)
@@ -66,4 +104,8 @@ class ProfileFragment : Fragment() {
         }
     }
 
+
 }
+
+
+

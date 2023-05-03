@@ -4,6 +4,7 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.messaging.FirebaseMessaging
@@ -25,6 +26,11 @@ class MainActivity : AppCompatActivity(), LoginFragment.LoginSuccessListener {
         replaceFragment(logInPage)
 
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottom_navigation)
+
+        bottomNavigationView.setBackgroundColor(ContextCompat.getColor(this, R.color.teal))
+
+
+
 
         val pharmacyPage: Fragment = PharmacyFragment()
 

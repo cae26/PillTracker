@@ -1,3 +1,4 @@
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -6,6 +7,15 @@
     android:layout_marginTop="24dp"
     android:layout_marginBottom="24dp"
     android:background="@drawable/button_background">
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:textAppearanceMedium"
+        android:text="User's Name"
+        android:padding="10dp"
+        android:textColor="@color/black"
+       android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/nameTextView"
@@ -14,8 +24,21 @@
         android:textAppearance="?android:textAppearanceMedium"
         android:padding="10dp"
         android:background="@drawable/edit_text_background"
-        android:text="  Name"
-        android:layout_marginBottom="32dp"/>
+        android:text="Name"
+        android:textColor="@color/black"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"/>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:textAppearanceMedium"
+        android:text="Doctor Name"
+        android:padding="10dp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        />
 
     <TextView
         android:id="@+id/doctorNameTextView"
@@ -24,8 +47,20 @@
         android:textAppearance="?android:textAppearanceMedium"
         android:text="Doctor Name"
         android:padding="10dp"
+        android:textColor="@color/black"
         android:background="@drawable/edit_text_background"
-        android:layout_marginBottom="32dp"/>
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"/>
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:textAppearanceMedium"
+        android:text="Doctor's Phone Number"
+        android:padding="10dp"
+        android:textColor="@color/black"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/doctorNumberTextView"
@@ -34,8 +69,20 @@
         android:textAppearance="?android:textAppearanceMedium"
         android:text="Doctor Phone Number"
         android:padding="10dp"
+        android:textColor="@color/black"
         android:background="@drawable/edit_text_background"
-        android:layout_marginBottom="32dp"/>
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"/>
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:textAppearanceMedium"
+        android:text="Doctor's Email"
+        android:padding="10dp"
+        android:textColor="@color/black"
+       android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/doctorEmailTextView"
@@ -44,7 +91,9 @@
         android:textAppearance="?android:textAppearanceMedium"
         android:text="Doctor Email"
         android:padding="10dp"
+        android:textColor="@color/black"
         android:background="@drawable/edit_text_background"/>
+
 
     <Button
         android:id="@+id/editProfileButton"
@@ -55,5 +104,4 @@
         android:background="@drawable/edit_text_background"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="32dp"/>
-
 </LinearLayout>
