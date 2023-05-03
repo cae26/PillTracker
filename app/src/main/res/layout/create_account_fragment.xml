@@ -1,6 +1,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/button_background">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -8,171 +9,199 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-    <TextView
-        android:id="@+id/textview_first_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="First Name" />
+        <TextView
+            android:id="@+id/textview_first_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="First Name" />
 
-    <EditText
-        android:id="@+id/edittext_first_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter your first name"
-        android:inputType="text" />
+        <EditText
+            android:id="@+id/edittext_first_name"
+            android:layout_width="match_parent"
+            android:layout_height="50sp"
+            android:hint="Enter your first name"
+            android:inputType="text"
+            android:padding="10dp"
+            android:background="@drawable/edit_text_background"/>
 
-    <TextView
-        android:id="@+id/textview_last_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Last Name" />
+        <TextView
+            android:id="@+id/textview_last_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Last Name" />
 
-    <EditText
-        android:id="@+id/edittext_last_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter your last name"
-        android:inputType="text" />
+        <EditText
+            android:id="@+id/edittext_last_name"
+            android:layout_width="match_parent"
+            android:layout_height="50sp"
+            android:hint="Enter your last name"
+            android:inputType="text"
+            android:padding="10dp"
+            android:background="@drawable/edit_text_background"/>
 
-    <TextView
-        android:id="@+id/textview_username"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Username" />
+        <TextView
+            android:id="@+id/textview_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Username" />
 
-    <EditText
-        android:id="@+id/edittext_username"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter your username"
-        android:inputType="text" />
+        <EditText
+            android:id="@+id/edittext_username"
+            android:layout_width="match_parent"
+            android:layout_height="50sp"
+            android:hint="Enter your username"
+            android:inputType="text"
+            android:padding="10dp"
+            android:background="@drawable/edit_text_background"/>
 
-    <TextView
-        android:id="@+id/textview_password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Password" />
+        <TextView
+            android:id="@+id/textview_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Password" />
 
-    <EditText
-        android:id="@+id/edittext_password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter your password"
-        android:inputType="textPassword" />
+        <EditText
+            android:id="@+id/edittext_password"
+            android:layout_width="match_parent"
+            android:layout_height="50sp"
+            android:hint="Enter your password"
+            android:inputType="textPassword"
+            android:padding="10dp"
+            android:background="@drawable/edit_text_background"/>
 
-    <TextView
-        android:id="@+id/textview_date_of_birth"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Date of Birth" />
+        <TextView
+            android:id="@+id/textview_date_of_birth"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Date of Birth" />
 
-    <EditText
-        android:id="@+id/edittext_date_of_birth"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter your date of birth (yyyy-mm-dd)"
-        android:inputType="date" />
+        <EditText
+            android:id="@+id/edittext_date_of_birth"
+            android:layout_width="match_parent"
+            android:layout_height="50sp"
+            android:hint="Enter your date of birth (yyyy-mm-dd)"
+            android:inputType="date"
+            android:padding="10dp"
+            android:background="@drawable/edit_text_background"/>
 
-    <TextView
-        android:id="@+id/textview_email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Email" />
+        <TextView
+            android:id="@+id/textview_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Email"
+            />
 
-    <EditText
-        android:id="@+id/edittext_email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter your email"
-        android:inputType="textEmailAddress" />
+        <EditText
+            android:id="@+id/edittext_email"
+            android:layout_width="match_parent"
+            android:layout_height="50sp"
+            android:hint="Enter your email"
+            android:inputType="textEmailAddress"
+            android:padding="10dp"
+            android:background="@drawable/edit_text_background"/>
 
-    <EditText
-        android:id="@+id/edittext_doctor_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter doctor's name"
-        android:inputType="text" />
+        <EditText
+            android:id="@+id/edittext_doctor_name"
+            android:layout_width="match_parent"
+            android:layout_height="50sp"
+            android:hint="Enter doctor's name"
+            android:inputType="text"
+            android:padding="10dp"
+            android:background="@drawable/edit_text_background"/>
 
-    <TextView
-        android:id="@+id/textview_doctor_email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Doctor's email" />
+        <TextView
+            android:id="@+id/textview_doctor_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Doctor's email" />
 
-    <EditText
-        android:id="@+id/edittext_doctor_email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter doctor's email"
-        android:inputType="textEmailAddress" />
+        <EditText
+            android:id="@+id/edittext_doctor_email"
+            android:layout_width="match_parent"
+            android:layout_height="50sp"
+            android:hint="Enter doctor's email"
+            android:inputType="textEmailAddress"
+            android:padding="10dp"
+            android:background="@drawable/edit_text_background"/>
 
-    <TextView
-        android:id="@+id/textview_doctor_phone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Doctor's phone" />
+        <TextView
+            android:id="@+id/textview_doctor_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Doctor's phone" />
 
-    <EditText
-        android:id="@+id/edittext_doctor_phone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter doctor's phone number"
-        android:inputType="phone" />
+        <EditText
+            android:id="@+id/edittext_doctor_phone"
+            android:layout_width="match_parent"
+            android:layout_height="50sp"
+            android:hint="Enter doctor's phone number"
+            android:inputType="phone"
+            android:padding="10dp"
+            android:background="@drawable/edit_text_background"/>
 
-    <TextView
-        android:id="@+id/textview_home_pharmacy"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Home pharmacy" />
+        <TextView
+            android:id="@+id/textview_home_pharmacy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Home pharmacy" />
 
-    <EditText
-        android:id="@+id/edittext_home_pharmacy"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter home pharmacy"
-        android:inputType="text" />
+        <EditText
+            android:id="@+id/edittext_home_pharmacy"
+            android:layout_width="match_parent"
+            android:layout_height="50sp"
+            android:hint="Enter home pharmacy"
+            android:inputType="text"
+            android:padding="10dp"
+            android:background="@drawable/edit_text_background"/>
 
-    <TextView
-        android:id="@+id/textview_pharmacy_address"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Pharmacy address" />
+        <TextView
+            android:id="@+id/textview_pharmacy_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Pharmacy address" />
 
-    <EditText
-        android:id="@+id/edittext_pharmacy_address"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter pharmacy address"
-        android:inputType="text" />
+        <EditText
+            android:id="@+id/edittext_pharmacy_address"
+            android:layout_width="match_parent"
+            android:layout_height="50sp"
+            android:hint="Enter pharmacy address"
+            android:inputType="text"
+            android:padding="10dp"
+            android:background="@drawable/edit_text_background"/>
 
-    <TextView
-        android:id="@+id/textview_pharmacy_phone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Pharmacy phone" />
+        <TextView
+            android:id="@+id/textview_pharmacy_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Pharmacy phone" />
 
-    <EditText
-        android:id="@+id/edittext_pharmacy_phone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter pharmacy phone number"
-        android:inputType="phone" />
+        <EditText
+            android:id="@+id/edittext_pharmacy_phone"
+            android:layout_width="match_parent"
+            android:layout_height="50sp"
+            android:hint="Enter pharmacy phone number"
+            android:inputType="phone"
+            android:padding="10dp"
+            android:background="@drawable/edit_text_background"/>
 
-    <Button
-        android:id="@+id/button_create_account"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="Create Account" />
+        <Button
+            android:id="@+id/button_create_account"
+            android:layout_width="match_parent"
+            android:layout_height="50sp"
+            android:layout_marginTop="32dp"
+            android:text="Create Account" />
+
     </LinearLayout>
 </ScrollView>
+
+
