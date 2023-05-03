@@ -140,17 +140,23 @@ class LogFragment() : Fragment(), LogAdapter.OnItemClickListener {
 
                 for (i in 0 until jsonResponse.length()) {
                     val jsonObject = jsonResponse.getJSONObject(i)
+                    val additionalNotes = jsonObject.getString("additionalNotes")
+                    val notes = if (additionalNotes.isNullOrEmpty()) "Notes" else additionalNotes
+                    println("additionalNotes: $additionalNotes, notes: $notes")
+
                     val log = Logs(
                         id = jsonObject.getInt("id"),
                         userName = jsonObject.getString("userName"),
                         medicineName = jsonObject.getString("medicineName"),
                         status = jsonObject.getString("status"),
                         dateTaken = jsonObject.getString("dateTaken"),
-                        additionalNotes = jsonObject.getString("additionalNotes"),
+                        additionalNotes = additionalNotes
+                    )
 
-                        )
                     logs.add(log)
                 }
+
+
                 activity?.runOnUiThread {
                     logAdapter.updatelogs(logs) // Update the existing adapter instead of creating a new one
                     swipeRefreshLayout.isRefreshing = false // Stop the refresh animation

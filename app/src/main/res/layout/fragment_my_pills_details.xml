@@ -1,23 +1,24 @@
-<?xml version="1.0" encoding="utf-8"?>
+
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="@drawable/button_background">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/tv_name_of_medicine_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Name of Medicine:"
-            android:textColor="@color/purple_700"
+            android:textColor="@color/black"
+            android:textStyle="bold"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
         <TextView
@@ -26,14 +27,17 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             tools:text="Aspirin"
-            android:textColor="@color/black"/>
+            android:textColor="@color/black"
+            android:padding="10dp"
+            android:background="@drawable/edit_text_background"/>
 
         <TextView
             android:id="@+id/status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Dose:"
-            android:textColor="@color/purple_700"
+            android:textColor="@color/black"
+            android:textStyle="bold"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
         <TextView
@@ -42,14 +46,17 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             tools:text="100 mg"
-            android:textColor="@color/black"/>
+            android:textColor="@color/black"
+            android:padding="10dp"
+            android:background="@drawable/edit_text_background"/>
 
         <TextView
             android:id="@+id/dateTaken"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Time to take medicine:"
-            android:textColor="@color/purple_700"
+            android:textColor="@color/black"
+            android:textStyle="bold"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
         <TextView
@@ -58,14 +65,17 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:textColor="@color/black"
-            tools:text="08:00 AM" />
+            tools:text="08:00 AM"
+            android:padding="10dp"
+            android:background="@drawable/edit_text_background"/>
 
         <TextView
             android:id="@+id/additionalNotes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Remaining medicine:"
-            android:textColor="@color/purple_700"
+            android:textColor="@color/black"
+            android:textStyle="bold"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
         <TextView
@@ -74,14 +84,17 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:textColor="@color/black"
-            tools:text="20 pills" />
+            tools:text="20 pills"
+            android:padding="10dp"
+            android:background="@drawable/edit_text_background"/>
 
         <TextView
             android:id="@+id/tv_additional_notes_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/purple_700"
-            android:text="Additional notes:"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:text="Additional Notes"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
         <TextView
@@ -89,14 +102,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
-            tools:text="Take with food." />
-
-        <Button
-            android:id="@+id/send_notification_btn"
-            android:layout_width="255dp"
-            android:layout_height="wrap_content"
-            android:text="Send Notification" />
-
+            tools:text="Take with food."
+            android:padding="10dp"
+            android:background="@drawable/edit_text_background"/>
 
     </LinearLayout>
 </ScrollView>

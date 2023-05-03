@@ -10,8 +10,9 @@ val userName: String,
 val medicineName: String,
 val status: String,
 val dateTaken: String,
-val additionalNotes: String
+val additionalNotes: String?
 ) : Parcelable {
     var isSelected: Boolean = false
     var isRefreshing:Boolean = false
+
 }

@@ -1,10 +1,15 @@
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/button_background">
+
 <LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    android:background="@drawable/button_background">
+    >
 
     <AutoCompleteTextView
         android:id="@+id/search_auto_complete_text"
@@ -18,7 +23,9 @@
         android:singleLine="true"
         android:textColor="@android:color/black"
         android:textSize="16sp"
-        android:padding="16dp" />
+        android:padding="16dp"
+        android:background="@drawable/edit_text_background"/>
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -43,9 +50,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Add" />
+            android:text="Add"
+            android:layout_marginStart="10dp" />
 
     </LinearLayout>
+
 
     <TextView
         android:id="@+id/search_result_label"
@@ -55,7 +64,8 @@
         android:textSize="18sp"
         android:textStyle="bold"
         android:paddingTop="16dp"
-        android:paddingBottom="8dp"/>
+        android:paddingBottom="8dp"
+        android:textColor="@color/black"/>
 
     <TextView
         android:id="@+id/drug_name_label"
@@ -63,14 +73,19 @@
         android:layout_height="wrap_content"
         android:text="Drug Name: "
         android:textSize="16sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        />
 
     <TextView
         android:id="@+id/drug_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="16sp"
-        android:textColor="@android:color/black"/>
+        android:textColor="@android:color/black"
+        android:text="Drug Name"
+        android:padding="10dp"
+        android:background="@drawable/edit_text_background"/>
 
     <TextView
         android:id="@+id/medical_condition_label"
@@ -79,14 +94,19 @@
         android:text="Medical Condition: "
         android:textSize="16sp"
         android:textStyle="bold"
-        android:layout_marginTop="16dp"/>
+        android:layout_marginTop="16dp"
+        android:textColor="@color/black"
+        />
 
     <TextView
         android:id="@+id/medical_condition"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="16sp"
-        android:textColor="@android:color/black"/>
+        android:textColor="@android:color/black"
+        android:text="Medical Condition"
+        android:padding="10dp"
+        android:background="@drawable/edit_text_background"/>
 
     <TextView
         android:id="@+id/generic_name_label"
@@ -95,14 +115,19 @@
         android:text="Generic Name: "
         android:textSize="16sp"
         android:textStyle="bold"
-        android:layout_marginTop="16dp"/>
+        android:layout_marginTop="16dp"
+        android:textColor="@color/black"
+        />
 
     <TextView
         android:id="@+id/generic_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="16sp"
-        android:textColor="@android:color/black"/>
+        android:text="Generic Name"
+        android:textColor="@android:color/black"
+        android:padding="10dp"
+        android:background="@drawable/edit_text_background"/>
 
     <TextView
         android:id="@+id/drug_class_label"
@@ -110,14 +135,18 @@
         android:layout_height="wrap_content"
         android:text="Drug Class: "
         android:textSize="16sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        />
 
     <TextView
         android:id="@+id/drug_class"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="16sp"
-        android:textColor="@android:color/black"/>
+        android:text="Drug Class"
+        android:textColor="@android:color/black"
+        android:padding="10dp"
+        android:background="@drawable/edit_text_background"/>
 
     <TextView
         android:id="@+id/drug_link_label"
@@ -127,7 +156,8 @@
         android:textColor="@android:color/black"
         android:textSize="16sp"
         android:textStyle="bold"
-        android:layout_marginTop="16dp"/>
+        android:layout_marginTop="16dp"
+        />
 
     <TextView
         android:id="@+id/drug_link"
@@ -136,6 +166,8 @@
         android:autoLink="web"
         android:padding="16dp"
         android:textColor="@android:color/holo_blue_dark"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        android:background="@drawable/edit_text_background"/>
 
 </LinearLayout>
+</ScrollView>

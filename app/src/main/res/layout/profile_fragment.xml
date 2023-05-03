@@ -2,40 +2,58 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:layout_marginTop="24dp"
+    android:layout_marginBottom="24dp"
+    android:background="@drawable/button_background">
 
     <TextView
         android:id="@+id/nameTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:textAppearanceMedium"
-        android:text="Name" />
+        android:padding="10dp"
+        android:background="@drawable/edit_text_background"
+        android:text="  Name"
+        android:layout_marginBottom="32dp"/>
 
     <TextView
         android:id="@+id/doctorNameTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:textAppearanceMedium"
-        android:text="Doctor Name" />
+        android:text="Doctor Name"
+        android:padding="10dp"
+        android:background="@drawable/edit_text_background"
+        android:layout_marginBottom="32dp"/>
 
     <TextView
         android:id="@+id/doctorNumberTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:textAppearanceMedium"
-        android:text="Doctor Phone Number" />
+        android:text="Doctor Phone Number"
+        android:padding="10dp"
+        android:background="@drawable/edit_text_background"
+        android:layout_marginBottom="32dp"/>
 
     <TextView
         android:id="@+id/doctorEmailTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:textAppearanceMedium"
-        android:text="Doctor Email" />
+        android:text="Doctor Email"
+        android:padding="10dp"
+        android:background="@drawable/edit_text_background"/>
 
     <Button
         android:id="@+id/editProfileButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Edit Profile" />
+        android:text="Edit Profile"
+        android:padding="10dp"
+        android:background="@drawable/edit_text_background"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="32dp"/>
 
 </LinearLayout>
