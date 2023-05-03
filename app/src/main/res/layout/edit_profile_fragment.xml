@@ -3,7 +3,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    android:background="@drawable/button_background">
+    android:background="@android:color/white">
 
     <TextView
         android:id="@+id/nameLabel"

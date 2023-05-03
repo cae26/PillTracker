@@ -33,7 +33,7 @@ class MyPillsDetailsFragment : Fragment() {
         tvTimeToTakeMed = view.findViewById(R.id.tv_time_to_take_med)
         tvAdditionalNotes = view.findViewById(R.id.tv_additional_notes)
         tvRemainingMedicine = view.findViewById(R.id.tv_remaining_medicine)
-//        pushNotificationBtn = view.findViewById<Button>(R.id.send_notification_btn)
+        pushNotificationBtn = view.findViewById<Button>(R.id.send_notification_btn)
 
 
         // Retrieve medicine data from arguments and populate UI elements
@@ -44,9 +44,9 @@ class MyPillsDetailsFragment : Fragment() {
             tvTimeToTakeMed.text = myPill.timeToTakeMed
             tvAdditionalNotes.text = myPill.additionalNotes
             tvRemainingMedicine.text = myPill.remainingMedicine
-//            pushNotificationBtn.setOnClickListener {
-//                AddMedication()
-//            }
+            pushNotificationBtn.setOnClickListener {
+                AddMedication()
+            }
         }
 
 

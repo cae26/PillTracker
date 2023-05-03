@@ -28,9 +28,9 @@
         <EditText
             android:id="@+id/edittext_username"
             android:layout_width="match_parent"
-            android:layout_height="50sp"
+            android:layout_height="35sp"
             android:background="@drawable/edit_text_background"
-            android:hint="      Enter your username"
+            android:hint="Enter your username"
             android:inputType="text"
             android:textColor="@color/text_color" />
 
@@ -47,9 +47,9 @@
         <EditText
             android:id="@+id/edittext_password"
             android:layout_width="match_parent"
-            android:layout_height="50sp"
+            android:layout_height="35sp"
             android:background="@drawable/edit_text_background"
-            android:hint="      Enter your password"
+            android:hint="Enter your password"
             android:inputType="textPassword"
             android:textColor="@color/text_color" />
 

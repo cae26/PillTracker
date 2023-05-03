@@ -24,10 +24,9 @@
         android:paddingTop="10dp"
         android:paddingEnd="5dp"
         android:paddingBottom="5dp"
-        android:text="Pharmacy Name"
+        android:text="N/A"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pharmacyPic" />
@@ -80,8 +79,9 @@
         android:paddingTop="5dp"
         android:paddingEnd="5dp"
         android:paddingBottom="5dp"
-        android:text="Address: "
-        android:textColor="@color/black"
+        android:text="Address:"
+        android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/homePharmacyNameTV" />
 
@@ -96,7 +96,6 @@
         android:text="Phone Number:"
         android:textSize="16sp"
         android:textStyle="bold"
-        android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/homePharmacyAddressTV" />
 
@@ -111,7 +110,6 @@
         android:text="Opening Schedule:"
         android:textSize="16sp"
         android:textStyle="bold"
-        android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/homePhoneNumberText" />
 
