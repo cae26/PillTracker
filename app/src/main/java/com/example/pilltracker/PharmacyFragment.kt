@@ -33,9 +33,6 @@ class PharmacyFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        //val pharmacyId = intent.getStringExtra("pharmId")
-        //val pharmacyId = intent
-
     }
 
     @SuppressLint("MissingInflatedId")

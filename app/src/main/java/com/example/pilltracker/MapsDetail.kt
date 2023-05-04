@@ -44,6 +44,7 @@ class MapsDetail : AppCompatActivity() {
         val pharmacyOpening = findViewById<TextView>(R.id.pharmacyOpeningHoursTV)
         val homePharmacyButton = findViewById<Button>(R.id.homePharmacyButton)
         val pharmacyImage = findViewById<ImageView>(R.id.imageView)
+        val attTV = findViewById<TextView>(R.id.attribute)
         val day2 = findViewById<TextView>(R.id.day2TV)
         val day3 = findViewById<TextView>(R.id.day3TV)
         val day4 = findViewById<TextView>(R.id.day4TV)
@@ -87,7 +88,15 @@ class MapsDetail : AppCompatActivity() {
                 }
             })
 
-            finish()
+            //finish()
+
+            //val fragmentManager = supportFragmentManager
+            //val fragmentTransaction = fragmentManager.beginTransaction()
+            //fragmentTransaction.replace(R.id.pill_tracker_frame_layout, PharmacyFragment())
+            //fragmentTransaction.commit()
+
+            val intent = Intent(this@MapsDetail, MainActivity::class.java)
+            startActivity(intent)
         }
 
 
@@ -115,6 +124,10 @@ class MapsDetail : AppCompatActivity() {
 
                     // Get the attribution text.
                     val attributions = photoMetadata?.attributions
+                    if (attributions != null)
+                    {
+                        attTV.text = attributions
+                    }
 
                     // Create a FetchPhotoRequest.
                     val photoRequest = FetchPhotoRequest.builder(photoMetadata)
@@ -158,5 +171,4 @@ class MapsDetail : AppCompatActivity() {
 
 
     }
-    //${place.address} ${place.phoneNumber} ${place.openingHours.weekdayText[0]}
 }
