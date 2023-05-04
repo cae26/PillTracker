@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import org.json.JSONArray
@@ -68,9 +69,10 @@ class AddNotesFragment : Fragment() {
                         // Handle the failure as needed
                     }
                 })
-
-                // Navigate back to the previous fragment
+                Toast.makeText(requireContext(), "Notes added", Toast.LENGTH_SHORT).show()
                 requireActivity().onBackPressed()
+                // Navigate back to the previous fragment
+
             } else {
                 addNotes.error = "Notes field cannot be empty"
             }

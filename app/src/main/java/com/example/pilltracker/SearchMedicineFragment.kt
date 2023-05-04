@@ -9,6 +9,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import android.widget.*
 import androidx.fragment.app.Fragment
 import okhttp3.*
@@ -62,6 +63,7 @@ class SearchMedicineFragment : Fragment() {
                 return@setOnClickListener
             }
             fetchAndGetDetails(searchQuery)
+            searchAutoCompleteTextView.onEditorAction(EditorInfo.IME_ACTION_DONE)
         }
 
         addButton.setOnClickListener {

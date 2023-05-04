@@ -32,13 +32,13 @@
 
         <TimePicker
             android:id="@+id/time_picker"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="358dp"
+            android:layout_height="197dp"
             android:layout_marginTop="16dp"
-            android:scaleX="0.75"
-            android:scaleY="0.75"
             android:background="@drawable/time_picker_bg"
             android:padding="16dp"
+            android:scaleX="0.75"
+            android:scaleY="0.75"
             android:timePickerMode="spinner" />
 
         <TextView
@@ -79,11 +79,6 @@
             android:background="@drawable/edit_text_background"
             android:textColor="@android:color/black"
             android:textSize="16sp" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
 
         <Button
             android:id="@+id/add_medication_button"

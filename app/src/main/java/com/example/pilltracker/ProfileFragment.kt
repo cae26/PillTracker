@@ -1,11 +1,14 @@
 package com.example.pilltracker
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -51,16 +54,12 @@ class ProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // Access the views in the layout
-        val nameTextView = view.findViewById<TextView>(R.id.nameTextView)
-        val doctorNameTextView = view.findViewById<TextView>(R.id.doctorNameTextView)
-        val doctorNumberTextView = view.findViewById<TextView>(R.id.doctorNumberTextView)
-        val doctorEmailTextView = view.findViewById<TextView>(R.id.doctorEmailTextView)
+        val nameTextView = view.findViewById<EditText>(R.id.nameEditText)
+        val doctorNameTextView = view.findViewById<EditText>(R.id.doctorNameEditText)
+        val doctorNumberTextView = view.findViewById<EditText>(R.id.doctorNumberEditText)
+        val doctorEmailTextView = view.findViewById<EditText>(R.id.doctorEmailEditText)
 
-        // Make an HTTP request to the PHP file and retrieve the response
         val url = "https://group8.dhruvaldhameliya.com/retrive_profile_info.php"
-
-        val client = OkHttpClient()
-
         val requestBody = JSONObject().apply {
             put("userName", username)
         }
@@ -70,23 +69,28 @@ class ProfileFragment : Fragment() {
             .post(RequestBody.create("application/json".toMediaTypeOrNull(), requestBody.toString()))
             .build()
 
+        val client = OkHttpClient()
+
         client.newCall(request).enqueue(object : Callback {
             override fun onResponse(call: Call, response: Response) {
                 val responseBody = response.body?.string()
                 val jsonResponse = JSONArray(responseBody)
                 if (jsonResponse.length() > 0) {
                     val profileData = jsonResponse.getJSONObject(0)
-                    nameTextView.text = profileData.getString("firstName") +" " + profileData.getString("lastName")
-                    doctorNameTextView.text = profileData.getString("doctorName")
-                    if (profileData.has("doctorPhone")) {
-                        doctorNumberTextView.text = profileData.getString("doctorPhone")
-                    }
-                    if (profileData.has("doctorEmail")) {
-                        doctorEmailTextView.text = profileData.getString("doctorEmail")
+                    val firstName = profileData.getString("firstName")
+                    val lastName = profileData.getString("lastName")
+                    activity?.runOnUiThread {
+                        nameTextView.setText("$firstName $lastName")
+                        doctorNameTextView.setText(profileData.getString("doctorName"))
+                        if (profileData.has("doctorPhone")) {
+                            doctorNumberTextView.setText(profileData.getString("doctorPhone"))
+                        }
+                        if (profileData.has("doctorEmail")) {
+                            doctorEmailTextView.setText(profileData.getString("doctorEmail"))
+                        }
                     }
                 }
             }
-
 
             override fun onFailure(call: Call, e: IOException) {
                 // Handle the failure as needed
@@ -96,11 +100,42 @@ class ProfileFragment : Fragment() {
         // Add a click listener to the edit profile button
         val editProfileButton = view.findViewById<Button>(R.id.editProfileButton)
         editProfileButton.setOnClickListener {
-            val editProfileFragment = EditProfileFragment.newInstance(username)
-            requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.pill_tracker_frame_layout, editProfileFragment)
-                .addToBackStack(null)
-                .commit()
+            // Get the text from the EditText views
+            val name = nameTextView.text.toString()
+            val doctorName = doctorNameTextView.text.toString()
+            val doctorNumber = doctorNumberTextView.text.toString()
+            val doctorEmail = doctorEmailTextView.text.toString()
+
+            // Create the JSON object
+            val requestBody = JSONObject().apply {
+                put("firstName", name.split(" ")[0])
+                put("lastName", name.split(" ")[1])
+                put("userName", username)
+                put("doctorName", doctorName)
+                put("doctorEmail", doctorEmail)
+                put("doctorPhone", doctorNumber)
+            }
+
+            // Make an HTTP request to the PHP file to update the profile info
+            val url = "https://group8.dhruvaldhameliya.com/edit_profile.php"
+            val client = OkHttpClient()
+            val request = Request.Builder()
+                .url(url)
+                .post(RequestBody.create("application/json".toMediaTypeOrNull(), requestBody.toString()))
+                .build()
+
+            client.newCall(request).enqueue(object : Callback {
+                override fun onResponse(call: Call, response: Response) {
+
+
+                    // Handle the response as needed
+                }
+
+                override fun onFailure(call: Call, e: IOException) {
+                    // Handle the failure as needed
+                }
+            })
+            Toast.makeText(requireContext(), "Profile Updated", Toast.LENGTH_LONG).show()
         }
     }
 

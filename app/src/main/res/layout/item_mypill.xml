@@ -18,50 +18,87 @@
             android:id="@+id/checkBoxMypills"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="292dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
-
-        <TextView
-            android:id="@+id/tv_medicine_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="Medicine Name: "
-            android:textColor="@color/teal_700"
-            android:textSize="20sp"
-            app:layout_constraintStart_toEndOf="@+id/checkBoxMypills"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tv_dose"
+            android:id="@+id/tv_medicine_name_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Medicine Name: "
+            android:textColor="@color/teal_700"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_dose_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Dose: "
             android:textColor="@color/black"
             android:textSize="14sp"
-            app:layout_constraintStart_toStartOf="@+id/tv_medicine_name"
-            app:layout_constraintTop_toBottomOf="@+id/tv_medicine_name" />
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@id/tv_medicine_name_label"
+            app:layout_constraintTop_toBottomOf="@id/tv_medicine_name_label" />
 
         <TextView
-            android:id="@+id/tv_time_to_take_med"
+            android:id="@+id/tv_time_to_take_med_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Time to take med: "
             android:textColor="@color/black"
             android:textSize="14sp"
-            app:layout_constraintStart_toStartOf="@+id/tv_dose"
-            app:layout_constraintTop_toBottomOf="@+id/tv_dose" />
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@id/tv_dose_label"
+            app:layout_constraintTop_toBottomOf="@id/tv_dose_label" />
 
         <TextView
-            android:id="@+id/tv_remaining_medicine"
+            android:id="@+id/tv_remaining_medicine_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Remaining medicine: "
             android:textColor="@color/black"
             android:textSize="14sp"
-            app:layout_constraintStart_toStartOf="@+id/tv_time_to_take_med"
-            app:layout_constraintTop_toBottomOf="@+id/tv_time_to_take_med" />
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@id/tv_time_to_take_med_label"
+            app:layout_constraintTop_toBottomOf="@id/tv_time_to_take_med_label" />
+
+        <TextView
+            android:id="@+id/tv_medicine_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@id/tv_medicine_name_label"
+            app:layout_constraintTop_toTopOf="@id/tv_medicine_name_label" />
+
+        <TextView
+            android:id="@+id/tv_dose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@id/tv_dose_label"
+            app:layout_constraintTop_toTopOf="@id/tv_dose_label" />
+
+        <TextView
+            android:id="@+id/tv_time_to_take_med"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@id/tv_time_to_take_med_label"
+            app:layout_constraintTop_toTopOf="@id/tv_time_to_take_med_label" />
+
+        <TextView
+            android:id="@+id/tv_remaining_medicine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@id/tv_remaining_medicine_label"
+            app:layout_constraintTop_toTopOf="@id/tv_remaining_medicine_label" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

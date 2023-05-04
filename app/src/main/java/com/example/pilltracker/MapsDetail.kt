@@ -9,6 +9,7 @@ import android.util.Log
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContentProviderCompat.requireContext
 import com.example.pilltracker.BuildConfig.MAPS_API_KEY
@@ -86,8 +87,9 @@ class MapsDetail : AppCompatActivity() {
                    // callback(null)
                 }
             })
-
+            //Toast.makeText(requireContext(), "Profile Updated", Toast.LENGTH_LONG).show()
             finish()
+
         }
 
 
@@ -118,8 +120,8 @@ class MapsDetail : AppCompatActivity() {
 
                     // Create a FetchPhotoRequest.
                     val photoRequest = FetchPhotoRequest.builder(photoMetadata)
-                        .setMaxWidth(700) // Optional.
-                        .setMaxHeight(500) // Optional.
+                        .setMaxWidth(1000) // Optional.
+                        .setMaxHeight(800) // Optional.
                         .build()
                     placesClient.fetchPhoto(photoRequest)
                         .addOnSuccessListener { fetchPhotoResponse: FetchPhotoResponse ->

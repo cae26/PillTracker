@@ -1,15 +1,13 @@
 package com.example.pilltracker
 
 import android.content.ContentValues.TAG
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.TimePicker
+import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
@@ -90,20 +88,20 @@ class AddMedicineFragment : Fragment() {
                 { response ->
                     // Handle successful response
                     Log.d(TAG, "Response: $response")
-
-
-
+                    Toast.makeText(requireContext(), "Medicine added", Toast.LENGTH_LONG).show()
+                    val navController = findNavController()
+                    navController.navigate(R.id.nav_myPills)
                 },
                 { error ->
                     // Handle error
                     Log.e(TAG, "Error: ${error.message}")
                     Log.d(TAG, "Response:")
-//                    val navController = findNavController()
-//                    navController.navigate(R.id.nav_myPills)
                 }
             )
-
+            Toast.makeText(requireContext(), "Medicine added", Toast.LENGTH_LONG).show()
             requestQueue.add(request)
+            val intent = Intent(requireActivity(), MainActivity::class.java)
+            startActivity(intent)
         }
     }
 
