@@ -31,9 +31,9 @@ class CreateAccountFragment : Fragment() {
         val doctorNameEditText = view?.findViewById<EditText>(R.id.edittext_doctor_name)
         val doctorEmailEditText = view?.findViewById<EditText>(R.id.edittext_doctor_email)
         val doctorPhoneEditText = view?.findViewById<EditText>(R.id.edittext_doctor_phone)
-        val homePharmacyEditText = view?.findViewById<EditText>(R.id.edittext_home_pharmacy)
-        val pharmacyAddressEditText = view?.findViewById<EditText>(R.id.edittext_pharmacy_address)
-        val pharmacyPhoneEditText = view?.findViewById<EditText>(R.id.edittext_pharmacy_phone)
+//        val homePharmacyEditText = view?.findViewById<EditText>(R.id.edittext_home_pharmacy)
+//        val pharmacyAddressEditText = view?.findViewById<EditText>(R.id.edittext_pharmacy_address)
+//        val pharmacyPhoneEditText = view?.findViewById<EditText>(R.id.edittext_pharmacy_phone)
         // Inflate the layout for this fragment
         if (createAccountButton != null) {
             createAccountButton.setOnClickListener {
@@ -46,9 +46,9 @@ class CreateAccountFragment : Fragment() {
                 val doctorName = doctorNameEditText?.text.toString()
                 val doctorEmail = doctorEmailEditText?.text.toString()
                 val doctorPhone = doctorPhoneEditText?.text.toString()
-                val homePharmacy = homePharmacyEditText?.text.toString()
-                val pharmacyAddress = pharmacyAddressEditText?.text.toString()
-                val pharmacyPhone = pharmacyPhoneEditText?.text.toString()
+//                val homePharmacy = homePharmacyEditText?.text.toString()
+//                val pharmacyAddress = pharmacyAddressEditText?.text.toString()
+//                val pharmacyPhone = pharmacyPhoneEditText?.text.toString()
 
                 // TODO: Add validation for form fields
 
@@ -62,9 +62,9 @@ class CreateAccountFragment : Fragment() {
                 jsonObject.put("doctorName", doctorName)
                 jsonObject.put("doctorEmail", doctorEmail)
                 jsonObject.put("doctorPhone", doctorPhone)
-                jsonObject.put("homePharmacy", homePharmacy)
-                jsonObject.put("pharmacyAddr", pharmacyAddress)
-                jsonObject.put("pharmacyPhone", pharmacyPhone)
+//                jsonObject.put("homePharmacy", homePharmacy)
+//                jsonObject.put("pharmacyAddr", pharmacyAddress)
+//                jsonObject.put("pharmacyPhone", pharmacyPhone)
 
                 val requestBody = jsonObject.toString().toRequestBody("application/json; charset=utf-8".toMediaTypeOrNull())
 

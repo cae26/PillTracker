@@ -48,6 +48,8 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+
         sharedPreferences = activity!!.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
 
         val usernameEditText: EditText = view.findViewById(R.id.edittext_username)

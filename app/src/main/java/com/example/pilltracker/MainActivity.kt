@@ -1,4 +1,5 @@
 package com.example.pilltracker
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -18,6 +19,7 @@ class MainActivity : AppCompatActivity(), LoginFragment.LoginSuccessListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_main)
 
         PillTrackerAPI().run()
@@ -77,11 +79,25 @@ class MainActivity : AppCompatActivity(), LoginFragment.LoginSuccessListener {
         }
         return false // Return false if Options Menu is disabled
     }
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//        return when (item.itemId) {
+//            R.id.menu_settings -> {
+//                val profileFragment = ProfileFragment.newInstance(loggedInUsername ?: "defaultUsername")
+//                replaceFragment(profileFragment)
+//                true
+//            }
+//            else -> super.onOptionsItemSelected(item)
+//        }
+//    }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.menu_settings -> {
                 val profileFragment = ProfileFragment.newInstance(loggedInUsername ?: "defaultUsername")
                 replaceFragment(profileFragment)
+                true
+            }
+            R.id.log_out -> {
+                logoutUser()
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -134,4 +150,21 @@ class MainActivity : AppCompatActivity(), LoginFragment.LoginSuccessListener {
         isOptionsMenuEnabled = true
         invalidateOptionsMenu()
     }
+    private fun logoutUser() {
+        // Clear shared preferences
+        val sharedPreferences = getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
+        sharedPreferences.edit().clear().apply()
+
+        // Unsubscribe from the topic
+        loggedInUsername?.let { FirebaseMessaging.getInstance().unsubscribeFromTopic(it) }
+
+        // Navigate back to LoginFragment
+        loggedInUsername = null
+        loggedInPassword = null
+        disableNavigationButtons()
+        disableOptionsMenu()
+        val loginFragment = LoginFragment.newInstance(this)
+        replaceFragment(loginFragment)
+    }
+
 }
