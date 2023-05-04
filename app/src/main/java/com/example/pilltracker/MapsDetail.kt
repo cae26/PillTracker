@@ -9,7 +9,6 @@ import android.util.Log
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContentProviderCompat.requireContext
 import com.example.pilltracker.BuildConfig.MAPS_API_KEY
@@ -45,6 +44,7 @@ class MapsDetail : AppCompatActivity() {
         val pharmacyOpening = findViewById<TextView>(R.id.pharmacyOpeningHoursTV)
         val homePharmacyButton = findViewById<Button>(R.id.homePharmacyButton)
         val pharmacyImage = findViewById<ImageView>(R.id.imageView)
+        val attTV = findViewById<TextView>(R.id.attribute)
         val day2 = findViewById<TextView>(R.id.day2TV)
         val day3 = findViewById<TextView>(R.id.day3TV)
         val day4 = findViewById<TextView>(R.id.day4TV)
@@ -87,9 +87,16 @@ class MapsDetail : AppCompatActivity() {
                    // callback(null)
                 }
             })
-            //Toast.makeText(requireContext(), "Profile Updated", Toast.LENGTH_LONG).show()
-            finish()
 
+            //finish()
+
+            //val fragmentManager = supportFragmentManager
+            //val fragmentTransaction = fragmentManager.beginTransaction()
+            //fragmentTransaction.replace(R.id.pill_tracker_frame_layout, PharmacyFragment())
+            //fragmentTransaction.commit()
+
+            val intent = Intent(this@MapsDetail, MainActivity::class.java)
+            startActivity(intent)
         }
 
 
@@ -117,11 +124,15 @@ class MapsDetail : AppCompatActivity() {
 
                     // Get the attribution text.
                     val attributions = photoMetadata?.attributions
+                    if (attributions != null)
+                    {
+                        attTV.text = attributions
+                    }
 
                     // Create a FetchPhotoRequest.
                     val photoRequest = FetchPhotoRequest.builder(photoMetadata)
-                        .setMaxWidth(1000) // Optional.
-                        .setMaxHeight(800) // Optional.
+                        .setMaxWidth(700) // Optional.
+                        .setMaxHeight(500) // Optional.
                         .build()
                     placesClient.fetchPhoto(photoRequest)
                         .addOnSuccessListener { fetchPhotoResponse: FetchPhotoResponse ->
@@ -160,5 +171,4 @@ class MapsDetail : AppCompatActivity() {
 
 
     }
-    //${place.address} ${place.phoneNumber} ${place.openingHours.weekdayText[0]}
 }
