@@ -149,7 +149,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         val remoteView = RemoteViews(context.packageName, R.layout.notification)
         remoteView.setTextViewText(R.id.title, title)
         remoteView.setTextViewText(R.id.notificationContent, message)
-        remoteView.setImageViewResource(R.id.appLogo, R.drawable.ic_stat_ic_notification)
+        remoteView.setImageViewResource(R.id.appLogo, R.drawable.app_logo_playstore)
 
         // Set the click listeners for the buttons
         val takenIntent = Intent(context, NotificationActionReceiver::class.java).apply {
@@ -162,8 +162,9 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             context,
             1,
             takenIntent,
-            PendingIntent.FLAG_UPDATE_CURRENT
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )
+
         remoteView.setOnClickPendingIntent(R.id.takenButton, takenPendingIntent)
 
         val notTakenIntent = Intent(context, NotificationActionReceiver::class.java).apply {
@@ -176,8 +177,10 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             context,
             2,
             notTakenIntent,
-            PendingIntent.FLAG_UPDATE_CURRENT
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )
+
+
         remoteView.setOnClickPendingIntent(R.id.notTakenButton, notTakenPendingIntent)
 
         return remoteView
@@ -186,15 +189,9 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
     fun generateNotification(title: String, message: String, user: String, context: Context) {
         // Create an intent for the notification
-        val intent = Intent(context, MainActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-        }
-        val pendingIntent = PendingIntent.getActivity(
-            context,
-            0,
-            intent,
-            PendingIntent.FLAG_ONE_SHOT
-        )
+        val intent = Intent(context, MainActivity::class.java)
+        val pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
+
 
         // Create the custom RemoteViews for the notification
         val remoteViews = getRemoteView(title, message, user, context)
@@ -223,6 +220,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         // Show the notification
         notificationManager.notify(Random().nextInt(1000), builder.build())
     }
+
 
 }
 

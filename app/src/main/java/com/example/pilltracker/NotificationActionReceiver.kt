@@ -98,7 +98,20 @@ class NotificationActionReceiver : BroadcastReceiver() {
                     val responseBody = response.body?.string()
                     val jsonResponse = JSONObject(responseBody)
 
-                    // Handle the response here
+                    // Check the status field in the JSON response
+                    val status = jsonResponse.getString("status")
+                    if (status.equals("True")) {
+                        // The insert query executed successfully
+                    } else {
+                        // The insert query failed
+                        Handler(Looper.getMainLooper()).post {
+                            Toast.makeText(
+                                context,
+                                "Error: Failed to insert log",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    }
                 } else {
                     // Handle the error here
                     Log.e("Error", "HTTP error code: ${response.code}")
@@ -113,15 +126,7 @@ class NotificationActionReceiver : BroadcastReceiver() {
             }
 
             override fun onFailure(call: Call, e: IOException) {
-                // Handle the error here
-                Log.e("Error", "Failed to fetch data: ${e.message}")
-                Handler(Looper.getMainLooper()).post {
-                    Toast.makeText(
-                        context,
-                        "Error: ${e.localizedMessage}",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
+                // Handle the network failure here
             }
         })
     }

@@ -131,8 +131,8 @@ class MapsDetail : AppCompatActivity() {
 
                     // Create a FetchPhotoRequest.
                     val photoRequest = FetchPhotoRequest.builder(photoMetadata)
-                        .setMaxWidth(700) // Optional.
-                        .setMaxHeight(500) // Optional.
+                        .setMaxWidth(1200) // Optional.
+                        .setMaxHeight(800) // Optional.
                         .build()
                     placesClient.fetchPhoto(photoRequest)
                         .addOnSuccessListener { fetchPhotoResponse: FetchPhotoResponse ->
